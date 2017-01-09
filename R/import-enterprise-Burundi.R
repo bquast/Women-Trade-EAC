@@ -14,3 +14,9 @@ Burundi_2006_Micro <- read_dta("~/Women-Trade-EAC/data/Enterprise/Burundi/Burund
 # save
 save.image("~/Women-Trade-EAC/data/Enterprise/Burundi/Burundi-Enterprise.R.RData")
 
+# load explore library
+library(explore)
+
+# explore data
+
+
