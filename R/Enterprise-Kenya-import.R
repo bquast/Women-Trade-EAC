@@ -23,7 +23,13 @@ save(Kenya_2007,
 library(explore)
 
 # explore data
+<<<<<<< HEAD
 explore(Kenya_2007)
 explore(Kenya_2013)
 explore(Kenya_2007_Micro)
 explore(Kenya_2013_Micro)
+=======
+explore(Kenya_2006)
+explore(Kenya_2014)
+explore(Kenya_2006_Micro)
+>>>>>>> f2d2c0cd52780e014c9f334a325b5dec8a951a9a
