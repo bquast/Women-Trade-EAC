@@ -49,3 +49,42 @@ Burundi_2014$d3b %>%
 Burundi_2014$d3c %>%
   to_factor() %>%
   qplot(main = attributes(.)$label)
+
+
+## l5a | Num. Full-time Employees At End Of Last Fiscal Yr: female production workers
+Burundi_2014$l5 %>%
+  na.omit() %>%
+  to_factor() %>%
+  qplot(main = 'Num. Full-time Employees At End Of Last Fiscal Yr: female production workers')
+
+## l5b | Num. Full-time Employees At End Of Last Fiscal Yr: female non-production workers
+Burundi_2014$l5a %>%
+  na.omit() %>%
+  to_factor() %>%
+  qplot(main = 'Num. Full-time Employees At End Of Last Fiscal Yr: female non-production workers')
+
+## l5 | Num. Full-time Employees At End Of Last Fiscal Yr: female
+Burundi_2014$l5a %>%
+  na.omit() %>%
+  to_factor() %>%
+  qplot(main = 'Num. Full-time Employees At End Of Last Fiscal Yr: female')
+  
+## l6 | Num. Full-Time Temporary Employees At End Of Last Fiscal Yr
+Burundi_2014$l6 %>%
+  to_factor() %>%
+  table()
+
+## l6a | Full-time female seasonal or temporary workers employed last fiscal year
+Burundi_2014$l6a %>%
+  to_factor() %>%
+  table()
+
+## l9a | Average Years Of Education For Typical Production Worker
+Burundi_2014$l9a %>%
+  as.numeric() %>%
+  qplot(main = 'Average Years Of Education For Typical Production Worker')
+
+## l9a2 | Average number of years of education of typical Female production worker
+Burundi_2014$l9a2 %>%
+  as.numeric() %>%
+  qplot(main = 'Average number of years of education of typical Female production worker')
