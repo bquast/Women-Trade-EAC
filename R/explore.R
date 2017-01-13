@@ -4,7 +4,7 @@
 # bquast@gmail.com
 
 # load data
-load("~/Women-Trade-EAC/data/Enterprise/Burundi/Burundi-Enterprise.R.RData")
+load("data/Enterprise/Burundi/Burundi-Enterprise.R.RData")
 
 #
 table(Burundi_2006$estid)
