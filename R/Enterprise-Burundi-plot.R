@@ -60,7 +60,7 @@ Burundi_2014 %>%
 Burundi_2014 %>%
   filter(l5 >= 0) %>%
   ggplot(aes(x=l5)) %+%
-  geom_histogram(binwidth = 20) %+%
+  geom_histogram(binwidth = 5) %+%
   labs(title = 'Num. Full-time Employees At End Of Last Fiscal Yr: female')
 
 ## l5a | Num. Full-time Employees At End Of Last Fiscal Yr: female production workers
@@ -74,7 +74,7 @@ Burundi_2014 %>%
 Burundi_2014 %>%
   filter(l5b >= 0) %>%
   ggplot(aes(x=l5b)) %+%
-  geom_histogram(binwidth = 10) %+%
+  geom_histogram(binwidth = 2) %+%
   labs(title = 'Num. Full-time Employees At End Of Last Fiscal Yr: female non-production workers')
 
 
@@ -82,14 +82,14 @@ Burundi_2014 %>%
 Burundi_2014 %>%
   filter(l6 >= 0) %>%
   ggplot(aes(x=l6)) %+%
-  geom_histogram(binwidth = 50) %+%
+  geom_histogram(binwidth = 20) %+%
   labs(title = 'Num. Full-Time Temporary Employees At End Of Last Fiscal Yr')
 
 ## l6a | Full-time female seasonal or temporary workers employed last fiscal year
 Burundi_2014 %>%
   filter(l6a >= 0) %>%
   ggplot(aes(x=l6a)) %+%
-  geom_histogram(binwidth = 50) %+%
+  geom_histogram(binwidth = 20) %+%
   labs(title = 'Full-time female seasonal or temporary workers employed last fiscal year')
 
 ## l9a | Average Years Of Education For Typical Production Worker
