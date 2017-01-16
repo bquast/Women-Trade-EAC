@@ -16,10 +16,11 @@ library(labelled)
 # Enterprise | Kenya | 2013
 
 ## b4a | Percentage of the firm owned by women
-Kenya_2013$b4a %>%
-  na.omit() %>%
-  to_factor() %>%
-  qplot(main = 'Percentage of the firm owned by women')
+Kenya_2013 %>%
+  ggplot(aes(x=b4a)) %+%
+  geom_histogram(binwidth = 10) %+%
+  labs(title = 'Percentage of the firm owned by women')
+
 
 ## b7a | Is The Top Manager Female?
 Kenya_2013$b7a %>%
@@ -36,55 +37,72 @@ Kenya_2013 %>%
     facet_grid( AF4b2 ~ b7a)
 
 ## d3a | % of sales: National sales
-Kenya_2013$d3a %>%
-  to_factor() %>%
-  qplot(main = attributes(.)$label)
+Kenya_2013 %>%
+  filter(d3a >= 0) %>%
+  ggplot(aes(x=d3a)) %+%
+  geom_histogram(binwidth = 10) %+%
+  labs(title = 'Percentage of sales: National sales')
 
 ## d3b | % of sales: Indirect exports
-Kenya_2013$d3b %>%
-  to_factor() %>%
-  qplot(main = attributes(.)$label)
+Kenya_2013 %>%
+  filter(d3b >= 0) %>%
+  ggplot(aes(x=d3b)) %+%
+  geom_histogram(binwidth = 10) %+%
+  labs(title = 'Percentage of sales: Indirect exports')
 
 ## d3c | % of sales: Direct exports
-Kenya_2013$d3c %>%
-  to_factor() %>%
-  qplot(main = attributes(.)$label)
-
-
-## l5a | Num. Full-time Employees At End Of Last Fiscal Yr: female production workers
-Kenya_2013$l5a %>%
-  na.omit() %>%
-  to_factor() %>%
-  qplot(main = 'Num. Full-time Employees At End Of Last Fiscal Yr: female production workers')
-
-## l5b | Num. Full-time Employees At End Of Last Fiscal Yr: female non-production workers
-Kenya_2013$l5a %>%
-  na.omit() %>%
-  to_factor() %>%
-  qplot(main = 'Num. Full-time Employees At End Of Last Fiscal Yr: female non-production workers')
+Kenya_2013 %>%
+  filter(d3c >= 0) %>%
+  ggplot(aes(x=d3c)) %+%
+  geom_histogram(binwidth = 10) %+%
+  labs(title = 'Percentage of sales: Direct exports')
 
 ## l5 | Num. Full-time Employees At End Of Last Fiscal Yr: female
-Kenya_2013$l5 %>%
-  na.omit() %>%
-  to_factor() %>%
-  qplot(main = 'Num. Full-time Employees At End Of Last Fiscal Yr: female')
+Kenya_2013 %>%
+  filter(l5 >= 0) %>%
+  ggplot(aes(x=l5)) %+%
+  geom_histogram(binwidth = 20) %+%
+  labs(title = 'Num. Full-time Employees At End Of Last Fiscal Yr: female')
+
+## l5a | Num. Full-time Employees At End Of Last Fiscal Yr: female production workers
+Kenya_2013 %>%
+  filter(l5a >= 0) %>%
+  ggplot(aes(x=l5a)) %+%
+  geom_histogram(binwidth = 100) %+%
+  labs(title = 'Num. Full-time Employees At End Of Last Fiscal Yr: female production workers')
+
+## l5b | Num. Full-time Employees At End Of Last Fiscal Yr: female non-production workers
+Kenya_2013 %>%
+  filter(l5b >= 0) %>%
+  ggplot(aes(x=l5b)) %+%
+  geom_histogram(binwidth = 10) %+%
+  labs(title = 'Num. Full-time Employees At End Of Last Fiscal Yr: female non-production workers')
+
   
 ## l6 | Num. Full-Time Temporary Employees At End Of Last Fiscal Yr
-Kenya_2013$l6 %>%
-  to_factor() %>%
-  table()
+Kenya_2013 %>%
+  filter(l6 >= 0) %>%
+  ggplot(aes(x=l6)) %+%
+  geom_histogram(binwidth = 50) %+%
+  labs(title = 'Num. Full-Time Temporary Employees At End Of Last Fiscal Yr')
 
 ## l6a | Full-time female seasonal or temporary workers employed last fiscal year
-Kenya_2013$l6a %>%
-  to_factor() %>%
-  table()
+Kenya_2013 %>%
+  filter(l6a >= 0) %>%
+  ggplot(aes(x=l6a)) %+%
+  geom_histogram(binwidth = 50) %+%
+  labs(title = 'Full-time female seasonal or temporary workers employed last fiscal year')
 
 ## l9a | Average Years Of Education For Typical Production Worker
-Kenya_2013$l9a %>%
-  as.numeric() %>%
-  qplot(main = 'Average Years Of Education For Typical Production Worker')
+Kenya_2013 %>%
+  filter(l9a >= 0) %>%
+  ggplot(aes(x=l9a)) %+%
+  geom_histogram(binwidth = 2) %+%
+  labs(title = 'Average Years Of Education For Typical Production Worker')
 
 ## l9a2 | Average number of years of education of typical Female production worker
-Kenya_2013$l9a2 %>%
-  as.numeric() %>%
-  qplot(main = 'Average number of years of education of typical Female production worker')
+Kenya_2013 %>%
+  filter(l9a2 >= 0) %>%
+  ggplot(aes(x=l9a2)) %+%
+  geom_histogram(binwidth = 2) %+%
+  labs(title = 'Average number of years of education of typical Female production worker')
