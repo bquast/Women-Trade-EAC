@@ -106,3 +106,21 @@ Kenya_2013 %>%
   ggplot(aes(x=l9a2)) %+%
   geom_histogram(binwidth = 2) %+%
   labs(title = 'Average number of years of education of typical Female production worker')
+
+## gender_ratio_prod | 
+Kenya_2013 %>%
+  filter(gender_ratio_prod >= 0) %>%
+  filter(gender_ratio_prod <= 1) %>%
+  ggplot( aes(x=gender_ratio_prod, fill=to_factor(e1)) ) %+%
+  geom_histogram(position='fill', bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Production Workers: Female Ratio vs. Goods Destination')
+
+## gender_ratio_nonprod | 
+Kenya_2013 %>%
+  filter(gender_ratio_nonprod >= 0) %>%
+  filter(gender_ratio_nonprod <= 1) %>%
+  ggplot( aes(x=gender_ratio_nonprod, fill=to_factor(e1)) ) %+%
+  geom_histogram(position='fill', bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination')
