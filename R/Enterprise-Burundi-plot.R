@@ -17,14 +17,19 @@ library(labelled)
 
 ## b4a | Percentage of the firm owned by women
 Burundi_2014 %>%
-  ggplot(aes(x=b4a)) %+%
+  ggplot(aes(x=b4a, fill=to_factor(e1)) ) %+%
   geom_histogram(binwidth = 10) %+%
-  labs(title = 'Percentage of the firm owned by women')
+  labs(title = 'Percentage of the firm owned by women') %+%
+  xlab('share')
 
 ## b7a | Is The Top Manager Female?
-Burundi_2014$b7a %>%
-  to_factor() %>%
-  qplot(main = attributes(.)$label)
+Burundi_2014 %>%
+  ggplot( aes(x=to_factor(e1), fill=to_factor(b7a)) ) %+%
+  geom_histogram(stat='count') %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Is the top manager female?',
+       subtitle = 'by product destination') %+%
+  xlab('product destination')
 
 ## by AF4b2 | Is the Top Manager a public official?
 Burundi_2014 %>%
@@ -105,3 +110,37 @@ Burundi_2014 %>%
   ggplot(aes(x=l9a2)) %+%
   geom_histogram(binwidth = 2) %+%
   labs(title = 'Average number of years of education of typical Female production worker')
+
+
+## gender_ratio_prod by destination | 
+Burundi_2014 %>%
+  filter(gender_ratio_prod >= 0) %>%
+  filter(gender_ratio_prod <= 1) %>%
+  ggplot( aes(x=gender_ratio_prod, fill=to_factor(e1)) ) %+%
+  geom_histogram(position='fill', bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
+       subtitle = 'by >= 10 employees (TRUE)') %+%
+  facet_grid( . ~ l4a >= 10)
+
+## gender_ratio_nonprod by destiation | 
+Burundi_2014 %>%
+  filter(gender_ratio_nonprod >= 0) %>%
+  filter(gender_ratio_nonprod <= 1) %>%
+  ggplot( aes(x=gender_ratio_nonprod, fill=to_factor(e1)) ) %+%
+  geom_histogram(position='fill', bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
+       subtitle = 'by >= 10 employees (TRUE)') %+%
+  facet_grid( . ~ l4a >= 10)
+
+## company size by destination
+Burundi_2014 %>%
+  filter(l4a >= 0) %>%
+  filter(l4a < 100) %>%
+  ggplot( aes(x=l4a, fill=to_factor(e1)) ) %+%
+  geom_histogram() %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Company size distribution',
+       subtitle = 'by no of employees') %+%
+  xlab('no. of employees')
