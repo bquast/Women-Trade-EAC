@@ -14,17 +14,19 @@ library(broom)
 
 # define models
 m1 <- formula(gender_ratio_prod ~ to_factor(e1) ) # ratio female prod workers
-m2 <- formula(gender_ratio_nonprod) # ratio female nonprod workers
+m2 <- formula(gender_ratio_nonprod ~ to_factor(e1) ) # ratio female nonprod workers
 m3 <- formula() # (partially) owned by female
 m4 <- formula() # percentage owned by female
 
 # estimate models
-m1_r1 <- lm(m1, data = Kenya_2007)
-m1_r2 <- lm(m1, data = Kenya_2013)
+m1_r1 <- lm(m1, data = Kenya_2013)
+m2_r1 <- lm(m2, data = Kenya_2013)
+
 
 
 # view output
 summary(m1_r1)
-summary(m1_r2)
+summary(m2_r1)
 
-tidy(m1_r2)
+tidy(m1_r1)
+tidy(m2_r1)
