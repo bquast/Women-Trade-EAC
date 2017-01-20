@@ -16,10 +16,12 @@ Kenya_2013_Micro <- read_dta(file = "data/Enterprise/Kenya/Kenya_Micro-2013-full
 # compute ratios 2013
 Kenya_2013$gender_ratio_nonprod <- Kenya_2013$l5b / Kenya_2013$l3b
 Kenya_2013$gender_ratio_prod <- with(Kenya_2013, l5a/(l4a + l4b))
+Kenya_2013$gender_ratio_nonprod <- ifelse(Kenya_2013$gender_ratio_nonprod == -Inf, NA, Kenya_2013$gender_ratio_nonprod)
 
 # computer ratios 2007
 Kenya_2007$gender_ratio_nonprod <- with(Kenya_2007, j2b2 / j2a2)
 Kenya_2007$gender_ratio_prod <- with(Kenya_2007, j2b1 / j2a1)
+
 
 # merge Kenya 2007 data into 2013 data.frame
 ken07 <- select(Kenya_2007, panelid, c5a, gender_ratio_prod, gender_ratio_nonprod)
