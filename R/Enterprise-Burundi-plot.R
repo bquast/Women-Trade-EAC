@@ -117,6 +117,28 @@ Burundi_2014 %>%
   filter(gender_ratio_prod >= 0) %>%
   filter(gender_ratio_prod <= 1) %>%
   ggplot( aes(x=gender_ratio_prod, fill=to_factor(e1)) ) %+%
+  geom_histogram(bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
+       subtitle = 'by >= 10 employees (TRUE)') %+%
+  facet_grid( . ~ l4a >= 10)
+
+## gender_ratio_nonprod by destiation | 
+Burundi_2014 %>%
+  filter(gender_ratio_nonprod >= 0) %>%
+  filter(gender_ratio_nonprod <= 1) %>%
+  ggplot( aes(x=gender_ratio_nonprod, fill=to_factor(e1)) ) %+%
+  geom_histogram(bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
+       subtitle = 'by >= 10 employees (TRUE)') %+%
+  facet_grid( . ~ l4a >= 10)
+
+## gender_ratio_prod by destination | 
+Burundi_2014 %>%
+  filter(gender_ratio_prod >= 0) %>%
+  filter(gender_ratio_prod <= 1) %>%
+  ggplot( aes(x=gender_ratio_prod, fill=to_factor(e1)) ) %+%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Production Workers: Female Ratio vs. Goods Destination',

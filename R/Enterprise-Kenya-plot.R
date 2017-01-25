@@ -152,6 +152,28 @@ Kenya_2007 %>%
   filter(gender_ratio_prod >= 0) %>%
   filter(gender_ratio_prod <= 1) %>%
   ggplot( aes(x=gender_ratio_prod, fill=to_factor(c5a)) ) %+%
+  geom_histogram(bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
+       subtitle = 'by >= 10 employees (TRUE)') %+%
+  facet_grid( . ~ l4a >= 10)
+
+## gender_ratio_nonprod | 
+Kenya_2007 %>%
+  filter(gender_ratio_nonprod >= 0) %>%
+  filter(gender_ratio_nonprod <= 1) %>%
+  ggplot( aes(x=gender_ratio_nonprod, fill=to_factor(c5a)) ) %+%
+  geom_histogram(bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
+       subtitle = 'by >= 10 employees (TRUE)') %+%
+  facet_grid( . ~ l4a >= 10)
+
+## gender_ratio_prod | 
+Kenya_2007 %>%
+  filter(gender_ratio_prod >= 0) %>%
+  filter(gender_ratio_prod <= 1) %>%
+  ggplot( aes(x=gender_ratio_prod, fill=to_factor(c5a)) ) %+%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
