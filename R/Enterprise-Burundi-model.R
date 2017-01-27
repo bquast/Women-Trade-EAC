@@ -18,13 +18,26 @@ m2 <- formula(gender_ratio_nonprod ~ to_factor(e1) ) # ratio female nonprod work
 m3 <- formula() # (partially) owned by female
 m4 <- formula() # percentage owned by female
 
+m21 <- formula(gender_ratio_prod ~ to_factor(c5a))
+m22 <- formula(gender_ratio_nonprod ~ to_factor(c5a))
+
 # estimate models
 m1_r1 <- lm(m1, data = Burundi_2014)
 m2_r1 <- lm(m2, data = Burundi_2014)
+
+m21_r1 <- lm(m21, data = Burundi_2006_manu)
+m22_r1 <- lm(m22, data = Burundi_2006_manu)
 
 # view output
 summary(m1_r1)
 summary(m2_r1)
 
+summary(m21_r1)
+summary(m22_r1)
+
+
 tidy(m1_r1)
 tidy(m2_r1)
+
+tidy(m21_r1)
+tidy(m22_r1)
