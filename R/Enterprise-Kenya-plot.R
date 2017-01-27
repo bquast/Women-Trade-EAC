@@ -119,7 +119,7 @@ Kenya_2013 %>%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
-       subtitle = 'by >= 10 employees (TRUE)') %+%
+       subtitle = 'by >= 10 employees (TRUE) | Kenya 2013') %+%
   facet_grid( . ~ l4a >= 10)
 
 ## gender_ratio_nonprod | 
@@ -130,7 +130,7 @@ Kenya_2013 %>%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
-       subtitle = 'by >= 10 employees (TRUE)') %+%
+       subtitle = 'by >= 10 employees (TRUE) | Kenya 2013') %+%
   facet_grid( . ~ l4a >= 10)
 
 ## company size by destination
