@@ -3,6 +3,11 @@
 # Bastiaan Quast
 # bquast@gmail.com
 
+### add by sector using a4a a4b
+### use glm
+### add covariates
+
+
 # load data
 load(file = 'data/Enterprise/Burundi/Burundi-Enterprise.RData')
 
@@ -13,13 +18,13 @@ library(labelled)
 library(broom)
 
 # define models
-m1 <- formula(gender_ratio_prod ~ to_factor(e1) ) # ratio female prod workers
-m2 <- formula(gender_ratio_nonprod ~ to_factor(e1) ) # ratio female nonprod workers
+m1 <- formula(female_share_prod ~ to_factor(e1) ) # ratio female prod workers
+m2 <- formula(female_share_nonprod ~ to_factor(e1) ) # ratio female nonprod workers
 m3 <- formula() # (partially) owned by female
 m4 <- formula() # percentage owned by female
 
-m21 <- formula(gender_ratio_prod ~ to_factor(c5a))
-m22 <- formula(gender_ratio_nonprod ~ to_factor(c5a))
+m21 <- formula(female_share_prod ~ to_factor(c5a))
+m22 <- formula(female_share_nonprod ~ to_factor(c5a))
 
 # estimate models
 m1_r1 <- lm(m1, data = Burundi_2014)

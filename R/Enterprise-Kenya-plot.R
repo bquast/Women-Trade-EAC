@@ -111,22 +111,22 @@ Kenya_2013 %>%
   geom_histogram(binwidth = 2) %+%
   labs(title = 'Average number of years of education of typical Female production worker')
 
-## gender_ratio_prod | 
+## female_share_prod | 
 Kenya_2013 %>%
-  filter(gender_ratio_prod >= 0) %>%
-  filter(gender_ratio_prod <= 1) %>%
-  ggplot( aes(x=gender_ratio_prod, fill=to_factor(e1)) ) %+%
+  filter(female_share_prod >= 0) %>%
+  filter(female_share_prod <= 1) %>%
+  ggplot( aes(x=female_share_prod, fill=to_factor(e1)) ) %+%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
        subtitle = 'by >= 10 employees (TRUE) | Kenya 2013') %+%
   facet_grid( . ~ l4a >= 10)
 
-## gender_ratio_nonprod | 
+## female_share_nonprod | 
 Kenya_2013 %>%
-  filter(gender_ratio_nonprod >= 0) %>%
-  filter(gender_ratio_nonprod <= 1) %>%
-  ggplot( aes(x=gender_ratio_nonprod, fill=to_factor(e1)) ) %+%
+  filter(female_share_nonprod >= 0) %>%
+  filter(female_share_nonprod <= 1) %>%
+  ggplot( aes(x=female_share_nonprod, fill=to_factor(e1)) ) %+%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
@@ -147,44 +147,44 @@ Kenya_2013 %>%
 
 # Enterprise | Kenya | 2007
 
-## gender_ratio_prod | 
+## female_share_prod | 
 Kenya_2007 %>%
-  filter(gender_ratio_prod >= 0) %>%
-  filter(gender_ratio_prod <= 1) %>%
-  ggplot( aes(x=gender_ratio_prod, fill=to_factor(c5a)) ) %+%
+  filter(female_share_prod >= 0) %>%
+  filter(female_share_prod <= 1) %>%
+  ggplot( aes(x=female_share_prod, fill=to_factor(c5a)) ) %+%
   geom_histogram(bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
        subtitle = 'by >= 10 employees (TRUE) | Kenya 2007') %+%
   facet_grid( . ~ l4a >= 10)
 
-## gender_ratio_nonprod | 
+## female_share_nonprod | 
 Kenya_2007 %>%
-  filter(gender_ratio_nonprod >= 0) %>%
-  filter(gender_ratio_nonprod <= 1) %>%
-  ggplot( aes(x=gender_ratio_nonprod, fill=to_factor(c5a)) ) %+%
+  filter(female_share_nonprod >= 0) %>%
+  filter(female_share_nonprod <= 1) %>%
+  ggplot( aes(x=female_share_nonprod, fill=to_factor(c5a)) ) %+%
   geom_histogram(bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
        subtitle = 'by >= 10 employees (TRUE) | Kenya 2007') %+%
   facet_grid( . ~ l4a >= 10)
 
-## gender_ratio_prod | 
+## female_share_prod | 
 Kenya_2007 %>%
-  filter(gender_ratio_prod >= 0) %>%
-  filter(gender_ratio_prod <= 1) %>%
-  ggplot( aes(x=gender_ratio_prod, fill=to_factor(c5a)) ) %+%
+  filter(female_share_prod >= 0) %>%
+  filter(female_share_prod <= 1) %>%
+  ggplot( aes(x=female_share_prod, fill=to_factor(c5a)) ) %+%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
        subtitle = 'by >= 10 employees (TRUE) | Kenya 2007') %+%
   facet_grid( . ~ l4a >= 10)
 
-## gender_ratio_nonprod | 
+## female_share_nonprod | 
 Kenya_2007 %>%
-  filter(gender_ratio_nonprod >= 0) %>%
-  filter(gender_ratio_nonprod <= 1) %>%
-  ggplot( aes(x=gender_ratio_nonprod, fill=to_factor(c5a)) ) %+%
+  filter(female_share_nonprod >= 0) %>%
+  filter(female_share_nonprod <= 1) %>%
+  ggplot( aes(x=female_share_nonprod, fill=to_factor(c5a)) ) %+%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
   labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
