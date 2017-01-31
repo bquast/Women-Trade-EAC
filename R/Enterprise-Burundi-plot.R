@@ -111,8 +111,29 @@ Burundi_2014 %>%
   geom_histogram(binwidth = 2) %+%
   labs(title = 'Average number of years of education of typical Female production worker')
 
+## female_share_prod by destination | sector
+Burundi_2014 %>%
+  filter(female_share_prod >= 0) %>%
+  filter(female_share_prod <= 1) %>%
+  ggplot( aes(x=female_share_prod, fill=to_factor(e1)) ) %+%
+  geom_histogram(bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
+       subtitle = 'by >= 10 employees (TRUE)') %+%
+  facet_grid( . ~ a4c)
 
-## female_share_prod by destination | 
+## female_share_nonprod by destiation | sector
+Burundi_2014 %>%
+  filter(female_share_nonprod >= 0) %>%
+  filter(female_share_nonprod <= 1) %>%
+  ggplot( aes(x=female_share_nonprod, fill=to_factor(e1)) ) %+%
+  geom_histogram(bins=20) %+%
+  scale_fill_brewer() %+%
+  labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
+       subtitle = 'by >= 10 employees (TRUE)') %+%
+  facet_grid( . ~ a4c)
+
+## female_share_prod by destination | employees > 10?
 Burundi_2014 %>%
   filter(female_share_prod >= 0) %>%
   filter(female_share_prod <= 1) %>%
@@ -123,7 +144,7 @@ Burundi_2014 %>%
        subtitle = 'by >= 10 employees (TRUE)') %+%
   facet_grid( . ~ l4a >= 10)
 
-## female_share_nonprod by destiation | 
+## female_share_nonprod by destiation | employees > 10? 
 Burundi_2014 %>%
   filter(female_share_nonprod >= 0) %>%
   filter(female_share_nonprod <= 1) %>%
@@ -145,7 +166,7 @@ Burundi_2014 %>%
        subtitle = 'by >= 10 employees (TRUE)') %+%
   facet_grid( . ~ l4a >= 10)
 
-## female_share_nonprod by destiation | 
+## female_share_nonprod by destination | 
 Burundi_2014 %>%
   filter(female_share_nonprod >= 0) %>%
   filter(female_share_nonprod <= 1) %>%
