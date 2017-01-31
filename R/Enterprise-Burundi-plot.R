@@ -118,8 +118,8 @@ Burundi_2014 %>%
   ggplot( aes(x=female_share_prod, fill=to_factor(e1)) ) %+%
   geom_histogram(bins=20) %+%
   scale_fill_brewer() %+%
-  labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
-       subtitle = 'by >= 10 employees (TRUE)') %+%
+  labs(title = 'Production Workers: Female Share Empl. vs. Goods Destination',
+       subtitle = 'by sector | Burundi 2014') %+%
   facet_grid( . ~ a4c)
 
 ## female_share_nonprod by destiation | sector
@@ -129,8 +129,8 @@ Burundi_2014 %>%
   ggplot( aes(x=female_share_nonprod, fill=to_factor(e1)) ) %+%
   geom_histogram(bins=20) %+%
   scale_fill_brewer() %+%
-  labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
-       subtitle = 'by >= 10 employees (TRUE)') %+%
+  labs(title = 'Non-Production Workers: Female Share Empl. vs. Goods Destination',
+       subtitle = 'by sector | Burundi 2014') %+%
   facet_grid( . ~ a4c)
 
 ## female_share_prod by destination | employees > 10?
@@ -140,7 +140,7 @@ Burundi_2014 %>%
   ggplot( aes(x=female_share_prod, fill=to_factor(e1)) ) %+%
   geom_histogram(bins=20) %+%
   scale_fill_brewer() %+%
-  labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
+  labs(title = 'Production Workers: Female Share Empl. vs. Goods Destination',
        subtitle = 'by >= 10 employees (TRUE)') %+%
   facet_grid( . ~ l4a >= 10)
 
@@ -151,7 +151,7 @@ Burundi_2014 %>%
   ggplot( aes(x=female_share_nonprod, fill=to_factor(e1)) ) %+%
   geom_histogram(bins=20) %+%
   scale_fill_brewer() %+%
-  labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
+  labs(title = 'Non-Production Workers: Female Share Empl. vs. Goods Destination',
        subtitle = 'by >= 10 employees (TRUE)') %+%
   facet_grid( . ~ l4a >= 10)
 
@@ -162,7 +162,7 @@ Burundi_2014 %>%
   ggplot( aes(x=female_share_prod, fill=to_factor(e1)) ) %+%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
-  labs(title = 'Production Workers: Female Ratio vs. Goods Destination',
+  labs(title = 'Production Workers: Female Share Empl. vs. Goods Destination',
        subtitle = 'by >= 10 employees (TRUE)') %+%
   facet_grid( . ~ l4a >= 10)
 
@@ -173,7 +173,7 @@ Burundi_2014 %>%
   ggplot( aes(x=female_share_nonprod, fill=to_factor(e1)) ) %+%
   geom_histogram(position='fill', bins=20) %+%
   scale_fill_brewer() %+%
-  labs(title = 'Non-Production Workers: Female Ratio vs. Goods Destination',
+  labs(title = 'Non-Production Workers: Female Share Empl. vs. Goods Destination',
        subtitle = 'by >= 10 employees (TRUE)') %+%
   facet_grid( . ~ l4a >= 10)
 
