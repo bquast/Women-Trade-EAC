@@ -20,6 +20,10 @@ Burundi_2014$female_share_prod <- with(Burundi_2014, l5a/(l4a + l4b))
 Burundi_2006_manu$female_share_nonprod <- with(Burundi_2006_manu, j2b2 / j2a2)
 Burundi_2006_manu$female_share_prod <- with(Burundi_2006_manu, j2b1 / j2a1)
 
+# simplify industry
+Burundi_2014$a4c <- ifelse(Burundi_2014$a4b < 20, 'Agriculture', ifelse(Burundi_2014$a4b < 40, 'Manufacturing', 'Services') )
+
+
 # save
 save(Burundi_2006,
      Burundi_2014,
