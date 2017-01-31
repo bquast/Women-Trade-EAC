@@ -22,6 +22,9 @@ Kenya_2013$female_share_nonprod <- ifelse(Kenya_2013$female_share_nonprod == -In
 Kenya_2007$female_share_nonprod <- with(Kenya_2007, j2b2 / j2a2)
 Kenya_2007$female_share_prod <- with(Kenya_2007, j2b1 / j2a1)
 
+# simplify industry
+Kenya_2013$a4c <- ifelse(Kenya_2013$a4b < 20, 'Agriculture', ifelse(Kenya_2013$a4b < 30, 'Manufacturing', 'Services') )
+
 
 # merge Kenya 2007 data into 2013 data.frame
 ken07 <- select(Kenya_2007, panelid, c5a, female_share_prod, female_share_nonprod)
