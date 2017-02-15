@@ -28,6 +28,7 @@ m22 <- formula(female_share_nonprod ~ to_factor(c5a))
 
 # estimate models
 m1_r1 <- lm(m1, data = Burundi_2014)
+m1_r2 <- glm(m1, data = Burundi_2014, family=quasibinomial(link='logit') )
 m2_r1 <- lm(m2, data = Burundi_2014)
 
 m21_r1 <- lm(m21, data = Burundi_2006_manu)

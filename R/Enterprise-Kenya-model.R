@@ -23,6 +23,7 @@ m22 <- formula(female_share_nonprod ~ to_factor(c5a))
 
 # estimate models
 m1_r1 <- lm(m1, data = Kenya_2013)
+m1_r2 <- glm(m1, data = Kenya_2013, family = quasibinomial(link='logit') )
 m2_r1 <- lm(m2, data = Kenya_2013)
 
 m21_r1 <- lm(m21, data = Kenya_2007)
