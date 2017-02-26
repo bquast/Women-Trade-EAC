@@ -50,7 +50,10 @@ summary(Kenya_2013$female_share_nonprod)
 
 # create clear homogenous variable names
 Kenya_2007$main_market <- to_factor(Kenya_2007$c5a)
+Kenya_2007$international <- ifelse(Kenya_2007$main_market == 'International', TRUE, ifelse(Kenya_2007$main_market == 0, NA, FALSE))
 Kenya_2013$main_market <- to_factor(Kenya_2013$e1)
+Kenya_2013$international <- ifelse(Kenya_2013$main_market == 'International', TRUE, ifelse(Kenya_2013$main_market == 0, NA, FALSE))
+
 
 # check distribution
 hist(Kenya_2007$female_share_prod)
