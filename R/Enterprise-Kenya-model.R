@@ -13,31 +13,30 @@ library(labelled)
 library(broom)
 
 # define models
-m1 <- formula(female_share_prod ~ to_factor(e1) ) # ratio female prod workers
-m2 <- formula(female_share_nonprod ~ to_factor(e1) ) # ratio female nonprod workers
-m3 <- formula() # (partially) owned by female
-m4 <- formula() # percentage owned by female
-
-m21 <- formula(female_share_prod ~ to_factor(c5a))
-m22 <- formula(female_share_nonprod ~ to_factor(c5a))
+m1 <- formula(female_share_prod ~ main_market)
+m2 <- formula(female_share_nonprod ~ main_market)
 
 # estimate models
-m1_r1 <- lm(m1, data = Kenya_2013)
-m1_r2 <- glm(m1, data = Kenya_2013, family = quasibinomial(link='logit') )
-m2_r1 <- lm(m2, data = Kenya_2013)
+k07_m1_r1 <- lm(m1, data = Kenya_2007)
+k07_m1_r2 <- glm(m1, data = Kenya_2007, family = quasibinomial(link='logit') )
+k07_m2_r1 <- lm(m2, data = Kenya_2007)
+k07_m2_r2 <- glm(m2, data = Kenya_2007, family = quasibinomial(link='logit') )
 
-m21_r1 <- lm(m21, data = Kenya_2007)
-m22_r1 <- lm(m22, data = Kenya_2007)
-
-
+k13_m1_r1 <- lm(m1, data = Kenya_2013)
+k13_m1_r2 <- glm(m1, data = Kenya_2013, family = quasibinomial(link='logit') )
+k13_m2_r1 <- lm(m2, data = Kenya_2013)
+k13_m2_r2 <- glm(m2, data = Kenya_2013, family = quasibinomial(link='logit') )
 
 # view output
-summary(m1_r1)
-summary(m2_r1)
+summary(k07_m1_r1)
+summary(k07_m1_r2)
+summary(k07_m2_r1)
+summary(k07_m2_r2)
 
-summary(m21_r1)
-summary(m22_r1)
-
+summary(k13_m1_r1)
+summary(k13_m1_r2)
+summary(k13_m2_r1)
+summary(k13_m2_r2)
 
 
 tidy(m1_r1)
