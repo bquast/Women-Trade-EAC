@@ -58,9 +58,7 @@ hist(Kenya_2013$female_share_nonprod)
 Kenya_2013$a4c <- ifelse(Kenya_2013$a4b < 20, 'Agriculture', ifelse(Kenya_2013$a4b < 40, 'Manufacturing', 'Services') )
 
 # merge Kenya 2007 data into 2013 data.frame
-ken07 <- select(Kenya_2007, panelid, c5a, female_share_prod, female_share_nonprod)
+Kenya0713 <- select(Kenya_2007, panelid, c5a, female_share_prod, female_share_nonprod)
 
 # save
-save(Kenya_2007,
-     Kenya_2013,
-     file = "data/Enterprise/Kenya/Kenya-Enterprise.RData")
+save.image(file = "data/Enterprise/Kenya/Kenya-Enterprise.RData")
