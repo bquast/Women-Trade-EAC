@@ -6,6 +6,7 @@
 # load library
 library(haven)
 library(dplyr)
+library(labelled)
 
 # load data
 load(file = 'data/Enterprise/Kenya/Kenya-Enterprise-Imported.RData')
@@ -46,6 +47,10 @@ summary(Kenya_2007$female_share_nonprod)
 
 summary(Kenya_2013$female_share_prod)
 summary(Kenya_2013$female_share_nonprod)
+
+# create clear homogenous variable names
+Kenya_2007$main_market <- to_factor(Kenya_2007$c5a)
+Kenya_2013$main_market <- to_factor(Kenya_2013$e1)
 
 # check distribution
 hist(Kenya_2007$female_share_prod)
