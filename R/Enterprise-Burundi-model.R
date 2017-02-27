@@ -13,10 +13,10 @@ library(labelled)
 library(broom)
 
 # define models
-m11 <- formula(female_share_prod ~ main_market + capital_city + business_city + multi_establ + intern_certif)
-m12 <- formula(female_share_prod ~ international + capital_city + business_city + multi_establ + intern_certif)
-m21 <- formula(female_share_nonprod ~ main_market + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
-m22 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
+m11 <- formula(female_share_prod ~ main_market + capital_city + business_city + intern_certif)
+m12 <- formula(female_share_prod ~ international + capital_city + business_city + intern_certif)
+m21 <- formula(female_share_nonprod ~ main_market + capital_city + business_city + intern_certif + industry)
+m22 <- formula(female_share_nonprod ~ international + capital_city + business_city + intern_certif  + industry)
 m212 <- formula(female_share_nonprod ~ main_market + capital_city + business_city + multi_establ + intern_certif + manufacturing)
 m222 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + manufacturing)
 
@@ -53,7 +53,7 @@ summary(b14_m11_r1)
 summary(b14_m11_r2)
 summary(b14_m21_r1)
 summary(b14_m21_r2)
-summary(b14_m12_r1)
-summary(b14_m12_r2) # good one
+summary(b14_m12_r1) # good one in earlier specification
+summary(b14_m12_r2)
 summary(b14_m22_r1)
-summary(b14_m22_r2)
+summary(b14_m22_r2) # good one
