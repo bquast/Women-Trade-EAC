@@ -25,7 +25,7 @@ summary(Burundi_2014$l5a)
 summary(Burundi_2014$l5b)
 
 # filter negative values
-Kenya_2014$d8[Kenya_2014$d8 < 0] <- NA
+Burundi_2014$d8[Burundi_2014$d8 < 0] <- NA
 
 # compute ratios 2014
 Burundi_2006$female_share_nonprod <- with(Burundi_2006, j2b2 / j2a2)
@@ -72,7 +72,7 @@ hist(Burundi_2014$female_share_nonprod)
 Burundi_2014$industry <- ifelse(Burundi_2014$a4b < 20, 'Agriculture', ifelse(Burundi_2014$a4b < 40, 'Manufacturing', 'Services') )
 
 # merge Burundi 2006 data into 2014 data.frame
-Burundi0614 <- select(Burundi_2006, panelid, c5a, female_share_prod, female_share_nonprod)
+# Burundi0614 <- select(Burundi_2006, panelid, c5a, female_share_prod, female_share_nonprod)
 
 # save
 save.image(file = "data/Enterprise/Burundi/Burundi-Enterprise.RData")
