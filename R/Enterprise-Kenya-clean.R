@@ -51,8 +51,21 @@ summary(Kenya_2013$female_share_nonprod)
 # create clear homogenous variable names
 Kenya_2007$main_market <- to_factor(Kenya_2007$c5a)
 Kenya_2007$international <- ifelse(Kenya_2007$main_market == 'International', TRUE, ifelse(Kenya_2007$main_market == 0, NA, FALSE))
+Kenya_2007$capital_city <- ifelse(Kenya_2007$city == 'Nairobi', TRUE, FALSE)
+Kenya_2007$business_city <- Kenya_2007$capital_city
+Kenya_2007$manufacturing <- ifelse(Kenya_2007$industry <= 10, TRUE, ifelse(Kenya_2007$industry > 10, FALSE, NA) )
+Kenya_2007$multi_establ <- ifelse(Kenya_2007$multiest == 1, TRUE, FALSE)
+Kenya_2007$intern_certif <- ifelse(Kenya_2007$e2b == 1, TRUE, FALSE)
+
 Kenya_2013$main_market <- to_factor(Kenya_2013$e1)
 Kenya_2013$international <- ifelse(Kenya_2013$main_market == 'International', TRUE, ifelse(Kenya_2013$main_market == 0, NA, FALSE))
+Kenya_2013$capital_city <- ifelse(Kenya_2013$a3b == 1, TRUE, FALSE)
+Kenya_2013$business_city <- ifelse(Kenya_2013$a3c == 1, TRUE, FALSE)
+Kenya_2013$no_establishments <- Kenya_2013$a7a
+Kenya_2013$multi_establ <- ifelse(Kenya_2013$no_establishments == 1, FALSE, TRUE)
+Kenya_2013$intern_certif <- ifelse(Kenya_2013$b8 < 0, NA, ifelse(Kenya_2013$b8 == 1, TRUE, FALSE))
+Kenya_2013$eac_exporter <- ifelse(Kenya_2013$d8 >= 2010, TRUE, FALSE)
+
 
 
 # check distribution
@@ -63,7 +76,7 @@ hist(Kenya_2013$female_share_prod)
 hist(Kenya_2013$female_share_nonprod)
 
 # simplify industry
-Kenya_2013$a4c <- ifelse(Kenya_2013$a4b < 20, 'Agriculture', ifelse(Kenya_2013$a4b < 40, 'Manufacturing', 'Services') )
+Kenya_2013$industry <- ifelse(Kenya_2013$a4b < 20, 'Agriculture', ifelse(Kenya_2013$a4b < 40, 'Manufacturing', 'Services') )
 
 # merge Kenya 2007 data into 2013 data.frame
 Kenya0713 <- select(Kenya_2007, panelid, c5a, female_share_prod, female_share_nonprod)
