@@ -3,11 +3,6 @@
 # Bastiaan Quast
 # bquast@gmail.com
 
-### add by sector using a4a a4b
-### use glm
-### add covariates
-
-
 # load data
 load(file = 'data/Enterprise/Burundi/Burundi-Enterprise.RData')
 
@@ -18,32 +13,47 @@ library(labelled)
 library(broom)
 
 # define models
-m1 <- formula(female_share_prod ~ to_factor(e1) ) # ratio female prod workers
-m2 <- formula(female_share_nonprod ~ to_factor(e1) ) # ratio female nonprod workers
-m3 <- formula() # (partially) owned by female
-m4 <- formula() # percentage owned by female
-
-m21 <- formula(female_share_prod ~ to_factor(c5a))
-m22 <- formula(female_share_nonprod ~ to_factor(c5a))
+m11 <- formula(female_share_prod ~ main_market + capital_city + business_city + multi_establ + intern_certif)
+m12 <- formula(female_share_prod ~ international + capital_city + business_city + multi_establ + intern_certif)
+m21 <- formula(female_share_nonprod ~ main_market + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
+m22 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
+m212 <- formula(female_share_nonprod ~ main_market + capital_city + business_city + multi_establ + intern_certif + manufacturing)
+m222 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + manufacturing)
 
 # estimate models
-m1_r1 <- lm(m1, data = Burundi_2014)
-m1_r2 <- glm(m1, data = Burundi_2014, family=quasibinomial(link='logit') )
-m2_r1 <- lm(m2, data = Burundi_2014)
+b06_m11_r1 <-  lm(m11, data = Burundi_2006)
+b06_m11_r2 <- glm(m11, data = Burundi_2006, family = quasibinomial(link='logit') )
+b06_m21_r1 <-  lm(m212, data = Burundi_2006)
+b06_m21_r2 <- glm(m212, data = Burundi_2006, family = quasibinomial(link='logit') )
+b06_m12_r1 <-  lm(m12, data = Burundi_2006)
+b06_m12_r2 <- glm(m12, data = Burundi_2006, family = quasibinomial(link='logit') )
+b06_m22_r1 <-  lm(m222, data = Burundi_2006)
+b06_m22_r2 <- glm(m222, data = Burundi_2006, family = quasibinomial(link='logit') )
 
-m21_r1 <- lm(m21, data = Burundi_2006_manu)
-m22_r1 <- lm(m22, data = Burundi_2006_manu)
+b14_m11_r1 <-  lm(m11, data = Burundi_2014)
+b14_m11_r2 <- glm(m11, data = Burundi_2014, family = quasibinomial(link='logit') )
+b14_m21_r1 <-  lm(m21, data = Burundi_2014)
+b14_m21_r2 <- glm(m21, data = Burundi_2014, family = quasibinomial(link='logit') )
+b14_m12_r1 <-  lm(m12, data = Burundi_2014)
+b14_m12_r2 <- glm(m12, data = Burundi_2014, family = quasibinomial(link='logit') )
+b14_m22_r1 <-  lm(m22, data = Burundi_2014)
+b14_m22_r2 <- glm(m22, data = Burundi_2014, family = quasibinomial(link='logit') )
 
 # view output
-summary(m1_r1)
-summary(m2_r1)
+summary(b06_m11_r1)
+summary(b06_m11_r2)
+summary(b06_m21_r1)
+summary(b06_m21_r2)
+summary(b06_m12_r1)
+summary(b06_m12_r2)
+summary(b06_m22_r1)
+summary(b06_m22_r2)
 
-summary(m21_r1)
-summary(m22_r1)
-
-
-tidy(m1_r1)
-tidy(m2_r1)
-
-tidy(m21_r1)
-tidy(m22_r1)
+summary(b14_m11_r1)
+summary(b14_m11_r2)
+summary(b14_m21_r1)
+summary(b14_m21_r2)
+summary(b14_m12_r1)
+summary(b14_m12_r2) # good one
+summary(b14_m22_r1)
+summary(b14_m22_r2)
