@@ -53,7 +53,7 @@ Kenya_2007$main_market <- to_factor(Kenya_2007$c5a)
 Kenya_2007$international <- ifelse(Kenya_2007$main_market == 'International', TRUE, ifelse(Kenya_2007$main_market == 0, NA, FALSE))
 Kenya_2007$capital_city <- ifelse(Kenya_2007$city == 'Nairobi', TRUE, FALSE)
 Kenya_2007$business_city <- Kenya_2007$capital_city
-Kenya_2007$manufacturing <- ifelse(Kenya_2007$industry <= 10, TRUE, ifelse(Kenya_2007$industry > 10, FALSE, NA) )
+Kenya_2007$industry <- as.factor(ifelse(Kenya_2007$industry <= 10, 'Manufacturing', ifelse(Kenya_2007$industry > 10, 'Services', NA) ) )
 Kenya_2007$multi_establ <- ifelse(Kenya_2007$multiest == 1, TRUE, FALSE)
 Kenya_2007$intern_certif <- ifelse(Kenya_2007$e2b == 1, TRUE, FALSE)
 
