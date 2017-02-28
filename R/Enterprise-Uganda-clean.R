@@ -51,13 +51,10 @@ summary(Uganda_2006$female_share_nonprod)
 summary(Uganda_2013$female_share_prod)
 summary(Uganda_2013$female_share_nonprod)
 
-# fix ratio
-Uganda_2013$female_share_nonprod[Uganda_2013$female_share_nonprod > 1] <- NA
-
 # create clear homogenous variable names
 Uganda_2006$main_market <- to_factor(Uganda_2006$c5a)
 Uganda_2006$international <- ifelse(Uganda_2006$main_market == 'International', TRUE, ifelse(Uganda_2006$main_market == 0, NA, FALSE))
-Uganda_2006$capital_city <- ifelse(Uganda_2006$city == 'dar es salaam', TRUE, FALSE)
+Uganda_2006$capital_city <- ifelse(Uganda_2006$city == 'Kampala', TRUE, FALSE)
 Uganda_2006$business_city <- Uganda_2006$capital_city
 Uganda_2006$industry <- as.factor(ifelse(Uganda_2006$industry <= 10, 'Manufacturing', ifelse(Uganda_2006$industry > 10, 'Services', NA) ) )
 Uganda_2006$multi_establ <- ifelse(Uganda_2006$multiest == 1, TRUE, FALSE)
@@ -71,8 +68,6 @@ Uganda_2013$no_establishments <- Uganda_2013$a7a
 Uganda_2013$multi_establ <- ifelse(Uganda_2013$no_establishments == 1, FALSE, TRUE)
 Uganda_2013$intern_certif <- ifelse(Uganda_2013$b8 < 0, NA, ifelse(Uganda_2013$b8 == 1, TRUE, FALSE))
 Uganda_2013$eac_exporter <- ifelse(Uganda_2013$d8 >= 2010, TRUE, FALSE)
-
-
 
 # check distribution
 hist(Uganda_2006$female_share_prod)
