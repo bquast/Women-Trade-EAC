@@ -57,7 +57,7 @@ Tanzania_2013$female_share_nonprod[Tanzania_2013$female_share_nonprod > 1] <- NA
 # create clear homogenous variable names
 Tanzania_2006$main_market <- to_factor(Tanzania_2006$c5a)
 Tanzania_2006$international <- ifelse(Tanzania_2006$main_market == 'International', TRUE, ifelse(Tanzania_2006$main_market == 0, NA, FALSE))
-Tanzania_2006$capital_city <- ifelse(Tanzania_2006$city == 'Nairobi', TRUE, FALSE)
+Tanzania_2006$capital_city <- ifelse(Tanzania_2006$city == 'dar es salaam', TRUE, FALSE)
 Tanzania_2006$business_city <- Tanzania_2006$capital_city
 Tanzania_2006$industry <- as.factor(ifelse(Tanzania_2006$industry <= 10, 'Manufacturing', ifelse(Tanzania_2006$industry > 10, 'Services', NA) ) )
 Tanzania_2006$multi_establ <- ifelse(Tanzania_2006$multiest == 1, TRUE, FALSE)
