@@ -79,6 +79,9 @@ hist(Uganda_2013$female_share_nonprod)
 # simplify industry
 Uganda_2013$industry <- ifelse(Uganda_2013$a4b < 20, 'Agriculture', ifelse(Uganda_2013$a4b < 40, 'Manufacturing', 'Services') )
 
+# if no exporting here year found, assume before 2010
+Uganda_2013$eac_exporter[is.na(Uganda_2013$eac_exporter)] <- FALSE
+
 # merge Uganda 2006 data into 2013 data.frame
 # Uganda0613 <- select(Uganda_2006, panelid, c5a, female_share_prod, female_share_nonprod)
 
