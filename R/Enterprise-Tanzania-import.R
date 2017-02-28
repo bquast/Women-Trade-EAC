@@ -25,12 +25,12 @@ Tanzania_2013$a4c <- ifelse(Tanzania_2013$a4b < 20, 'Agriculture', ifelse(Tanzan
 
 
 # merge Tanzania 2006 data into 2013 data.frame
-ken07 <- select(Tanzania_2006, panelid, c5a, female_share_prod, female_share_nonprod)
+tan07 <- select(Tanzania_2006, panelid, c5a, female_share_prod, female_share_nonprod)
 
 # save
 save(Tanzania_2006,
      Tanzania_2013,
-     file = "data/Enterprise/Tanzania/Tanzania-Enterprise.RData")
+     file = "data/Enterprise/Tanzania/Tanzania-Enterprise-Imported.RData")
 
 # load explore library
 library(explore)
