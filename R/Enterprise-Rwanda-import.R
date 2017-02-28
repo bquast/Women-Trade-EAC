@@ -24,4 +24,3 @@ explore(Rwanda_2006)
 explore(Rwanda_2011)
 explore(Rwanda_2006_Micro)
 explore(Rwanda_2011_Micro)
-
