@@ -52,14 +52,13 @@ Burundi_2006$intern_certif <- ifelse(Burundi_2006$e2b == 1, TRUE, FALSE)
 
 Burundi_2014$main_market <- to_factor(Burundi_2014$e1)
 Burundi_2014$international <- ifelse(Burundi_2014$main_market == 'International', TRUE, ifelse(Burundi_2014$main_market == 0, NA, FALSE))
-Burundi_2014$capital_city <- ifelse(Burundi_2014$a3b == 1, TRUE, FALSE)
+Burundi_2014$capital_city <- ifelse(Burundi_2014$a3c == 1, TRUE, FALSE)
 Burundi_2014$business_city <- ifelse(Burundi_2014$a3c == 1, TRUE, FALSE)
 Burundi_2014$no_establishments <- Burundi_2014$a7a
 Burundi_2014$multi_establ <- ifelse(Burundi_2014$no_establishments == 1, FALSE, TRUE)
 Burundi_2014$intern_certif <- ifelse(Burundi_2014$b8 < 0, NA, ifelse(Burundi_2014$b8 == 1, TRUE, FALSE))
 Burundi_2014$eac_exporter <- ifelse(Burundi_2014$d8 >= 2010, TRUE, FALSE)
-
-
+Burundi_2014$eac_exporter[is.na(Burundi_2014$eac_exporter)] <- FALSE
 
 # check distribution
 hist(Burundi_2006$female_share_prod)
