@@ -17,8 +17,8 @@ m11 <- formula(female_share_prod ~ main_market + capital_city + business_city + 
 m12 <- formula(female_share_prod ~ international + capital_city + business_city + multi_establ + intern_certif)
 m21 <- formula(female_share_nonprod ~ main_market + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
 m22 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
-m212 <- formula(female_share_nonprod ~ main_market + capital_city + business_city + multi_establ + intern_certif + industry)
-m222 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + industry)
+m21 <- formula(female_share_nonprod ~ main_market + capital_city + business_city + multi_establ + intern_certif + industry)
+m22 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + industry)
 
 # estimate models
 u06_m11_r1 <-  lm(m11, data = Uganda_2006)
