@@ -14,4 +14,4 @@ Uganda_2013 <- read_dta(file = "data/Enterprise/Uganda/Uganda-2013-full data.dta
 # save
 save(Uganda_2006,
      Uganda_2013,
-     file = "data/Enterprise/Uganda/Uganda-Enterprise.RData")
+     file = "data/Enterprise/Uganda/Uganda-Enterprise-Imported.RData")
