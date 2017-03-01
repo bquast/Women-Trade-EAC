@@ -21,8 +21,8 @@ k13_m2 <- formula(female_share_nonprod ~ international + capital_city + multi_es
 # estimate models
 k07_m1_r1 <-  lm(k07_m1, data = Kenya_2007)
 k07_m1_r2 <- glm(k07_m1, data = Kenya_2007, family = quasibinomial(link='logit') )
-k07_m2_r1 <-  lm(k07_m1, data = Kenya_2007)
-k07_m2_r2 <- glm(k07_m1, data = Kenya_2007, family = quasibinomial(link='logit') )
+k07_m2_r1 <-  lm(k07_m2, data = Kenya_2007)
+k07_m2_r2 <- glm(k07_m2, data = Kenya_2007, family = quasibinomial(link='logit') )
 
 k13_m1_r1 <-  lm(k13_m1, data = Kenya_2013)
 k13_m1_r2 <- glm(k13_m1, data = Kenya_2013, family = quasibinomial(link='logit') )
@@ -39,3 +39,5 @@ summary(k13_m1_r1)
 summary(k13_m1_r2)
 summary(k13_m2_r1)
 summary(k13_m2_r2)
+
+
