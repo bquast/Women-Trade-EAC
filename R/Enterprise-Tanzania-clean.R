@@ -38,8 +38,8 @@ Tanzania_2013$l5a[Tanzania_2013$l5a < 0] <- NA
 Tanzania_2013$l5b[Tanzania_2013$l5b < 0] <- NA
 
 # compute ratios 2013
-Tanzania_2006$female_share_nonprod <- with(Tanzania_2006, j2b2 / j2a2)
 Tanzania_2006$female_share_prod <- with(Tanzania_2006, j2b1 / j2a1)
+Tanzania_2006$female_share_nonprod <- with(Tanzania_2006, j2b2 / j2a2)
 
 Tanzania_2013$female_share_prod <- with(Tanzania_2013, l5a/(l4a + l4b))
 Tanzania_2013$female_share_nonprod <- Tanzania_2013$l5b / Tanzania_2013$l3b
@@ -49,10 +49,19 @@ summary(Tanzania_2006$female_share_prod)
 summary(Tanzania_2006$female_share_nonprod)
 
 summary(Tanzania_2013$female_share_prod)
-summary(Tanzania_2013$female_share_nonprod)
 
 # fix ratio
 Tanzania_2013$female_share_nonprod[Tanzania_2013$female_share_nonprod > 1] <- NA
+
+# check ratio again
+summary(Tanzania_2013$female_share_nonprod)
+
+# check distribution
+hist(Tanzania_2006$female_share_prod)
+hist(Tanzania_2006$female_share_nonprod)
+
+hist(Tanzania_2013$female_share_prod)
+hist(Tanzania_2013$female_share_nonprod)
 
 # create clear homogenous variable names
 Tanzania_2006$main_market <- to_factor(Tanzania_2006$c5a)
@@ -71,18 +80,12 @@ Tanzania_2013$no_establishments <- Tanzania_2013$a7a
 Tanzania_2013$multi_establ <- ifelse(Tanzania_2013$no_establishments == 1, FALSE, TRUE)
 Tanzania_2013$intern_certif <- ifelse(Tanzania_2013$b8 < 0, NA, ifelse(Tanzania_2013$b8 == 1, TRUE, FALSE))
 Tanzania_2013$eac_exporter <- ifelse(Tanzania_2013$d8 >= 2010, TRUE, FALSE)
+Tanzania_2013$industry <- as.factor(ifelse(Tanzania_2013$a4b < 20, 'Agriculture', ifelse(Tanzania_2013$a4b < 40, 'Manufacturing', 'Services') ) )
 
-
-
-# check distribution
-hist(Tanzania_2006$female_share_prod)
-hist(Tanzania_2006$female_share_nonprod)
-
-hist(Tanzania_2013$female_share_prod)
-hist(Tanzania_2013$female_share_nonprod)
-
-# simplify industry
-Tanzania_2013$industry <- ifelse(Tanzania_2013$a4b < 20, 'Agriculture', ifelse(Tanzania_2013$a4b < 40, 'Manufacturing', 'Services') )
+# missing values to FALSE
+Tanzania_2013$international[is.na(Tanzania_2013$international)] <- FALSE
+Tanzania_2013$intern_certif[is.na(Tanzania_2013$intern_certif)] <- FALSE
+Tanzania_2013$eac_exporter[is.na(Tanzania_2013$eac_exporter)] <- FALSE
 
 # merge Tanzania 2006 data into 2013 data.frame
 # Tanzania0713 <- select(Tanzania_2006, panelid, c5a, female_share_prod, female_share_nonprod)
