@@ -65,8 +65,12 @@ Kenya_2013$no_establishments <- Kenya_2013$a7a
 Kenya_2013$multi_establ <- ifelse(Kenya_2013$no_establishments == 1, FALSE, TRUE)
 Kenya_2013$intern_certif <- ifelse(Kenya_2013$b8 < 0, NA, ifelse(Kenya_2013$b8 == 1, TRUE, FALSE))
 Kenya_2013$eac_exporter <- ifelse(Kenya_2013$d8 >= 2010, TRUE, FALSE)
+Kenya_2013$industry <- as.factor(Kenya_2013$industry)
 
-
+# filter NAs
+Kenya_2013$intern_certif[is.na(Kenya_2013$intern_certif)] <- FALSE
+Kenya_2013$international[is.na(Kenya_2013$international)] <- FALSE
+# Kenya_2013$eac_exporter[is.na(Kenya_2013$eac_exporter)] <- FALSE
 
 # check distribution
 hist(Kenya_2007$female_share_prod)
