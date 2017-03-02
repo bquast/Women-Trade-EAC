@@ -15,12 +15,3 @@ Rwanda_2011 <- read_dta(file = "data/Enterprise/Rwanda/Rwanda-2011-full data-.dt
 save(Rwanda_2006,
      Rwanda_2011,
      file = "data/Enterprise/Rwanda/Rwanda-Enterprise-Imported.RData")
-
-# load explore library
-library(explore)
-
-# explore data
-explore(Rwanda_2006)
-explore(Rwanda_2011)
-explore(Rwanda_2006_Micro)
-explore(Rwanda_2011_Micro)
