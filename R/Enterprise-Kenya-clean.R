@@ -66,6 +66,8 @@ Kenya_2013$multi_establ <- ifelse(Kenya_2013$no_establishments == 1, FALSE, TRUE
 Kenya_2013$intern_certif <- ifelse(Kenya_2013$b8 < 0, NA, ifelse(Kenya_2013$b8 == 1, TRUE, FALSE))
 Kenya_2013$eac_exporter <- ifelse(Kenya_2013$d8 >= 2010, TRUE, FALSE)
 Kenya_2013$industry <- as.factor(Kenya_2013$industry)
+Kenya_2013$female_owner <- ifelse(Kenya_2013$b4 == 2, TRUE, ifelse(Kenya_2013$b4 == 1, FALSE, NA))
+Kenya_2013$female_ownership <- ifelse(Kenya_2013$b4a < 0, NA, Kenya_2013$b4a/100)
 
 # filter NAs
 Kenya_2013$intern_certif[is.na(Kenya_2013$intern_certif)] <- FALSE
