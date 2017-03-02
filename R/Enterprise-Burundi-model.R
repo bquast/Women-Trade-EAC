@@ -13,10 +13,10 @@ library(labelled)
 library(broom)
 
 # define models
-b06_m1 <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif + manufacturing)
-b06_m2 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + manufacturing)
-b14_m1 <- formula(female_share_prod    ~ international + capital_city + business_city + intern_certif)
-b14_m2 <- formula(female_share_nonprod ~ international + capital_city + business_city + intern_certif  + industry + eac_exporter)
+b06_m1 <- formula(female_share_prod    ~ international + capital_city + multi_establ + intern_certif)
+b06_m2 <- formula(female_share_nonprod ~ international + capital_city + multi_establ + intern_certif)
+b14_m1 <- formula(female_share_prod    ~ international + capital_city + multi_establ + intern_certif + eac_exporter)
+b14_m2 <- formula(female_share_nonprod ~ international + multi_establ + intern_certif  + industry + eac_exporter)
 
 # estimate models
 b06_m1_r1 <-  lm(b06_m1, data = Burundi_2006)
