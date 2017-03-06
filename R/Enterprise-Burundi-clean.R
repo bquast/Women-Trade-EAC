@@ -68,10 +68,14 @@ hist(Burundi_2014$female_share_prod)
 hist(Burundi_2014$female_share_nonprod)
 
 # simplify industry
-Burundi_2014$industry <- ifelse(Burundi_2014$a4b < 20, 'Agriculture', ifelse(Burundi_2014$a4b < 40, 'Manufacturing', 'Services') )
+Burundi_2014$Industry <- to_factor(Burundi_2014$a4b)
 
 # merge Burundi 2006 data into 2014 data.frame
 # Burundi0614 <- select(Burundi_2006, panelid, c5a, female_share_prod, female_share_nonprod)
+
+# WITS data
+Burundi_2014 <- merge(Burundi_2014, Burundi_WITS, by='Industry')
+rm(Burundi_WITS)
 
 # save
 save.image(file = "data/Enterprise/Burundi/Burundi-Enterprise.RData")
