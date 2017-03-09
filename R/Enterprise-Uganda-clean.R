@@ -68,6 +68,9 @@ Uganda_2013$no_establishments <- Uganda_2013$a7a
 Uganda_2013$multi_establ <- ifelse(Uganda_2013$no_establishments == 1, FALSE, TRUE)
 Uganda_2013$intern_certif <- ifelse(Uganda_2013$b8 < 0, NA, ifelse(Uganda_2013$b8 == 1, TRUE, FALSE))
 Uganda_2013$eac_exporter <- ifelse(Uganda_2013$d8 >= 2010, TRUE, FALSE)
+Uganda_2013$Industry <- to_factor(Uganda_2013$a4a)
+Uganda_2013$female_owner <- ifelse(Uganda_2013$b4 == 2, TRUE, ifelse(Uganda_2013$b4 == 1, FALSE, NA))
+Uganda_2013$female_ownership <- ifelse(Uganda_2013$b4a < 0, NA, Uganda_2013$b4a/100)
 
 # check distribution
 hist(Uganda_2006$female_share_prod)
@@ -77,13 +80,14 @@ hist(Uganda_2013$female_share_prod)
 hist(Uganda_2013$female_share_nonprod)
 
 # simplify industry
-Uganda_2013$industry <- ifelse(Uganda_2013$a4b < 20, 'Agriculture', ifelse(Uganda_2013$a4b < 40, 'Manufacturing', 'Services') )
+# Uganda_2013$industry <- ifelse(Uganda_2013$a4b < 20, 'Agriculture', ifelse(Uganda_2013$a4b < 40, 'Manufacturing', 'Services') )
 
 # if no exporting here year found, assume before 2010
 Uganda_2013$eac_exporter[is.na(Uganda_2013$eac_exporter)] <- FALSE
 
-# merge Uganda 2006 data into 2013 data.frame
-# Uganda0613 <- select(Uganda_2006, panelid, c5a, female_share_prod, female_share_nonprod)
+# WITS data
+Uganda_WITS$Industry <- as.factor(Uganda_WITS$Industry)
+Uganda_2013t <- merge(Uganda_2013, Uganda_WITS, by='Industry')
 
 # save
 save.image(file = "data/Enterprise/Uganda/Uganda-Enterprise.RData")
