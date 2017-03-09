@@ -15,8 +15,8 @@ library(broom)
 # define models
 k07_m1 <- formula(female_share_prod    ~ international + capital_city + multi_establ + intern_certif)
 k07_m2 <- formula(female_share_nonprod ~ international + capital_city + multi_establ + intern_certif)
-k13_m1 <- formula(female_share_prod    ~ international + capital_city + multi_establ + intern_certif)
-k13_m2 <- formula(female_share_nonprod ~ international + capital_city + multi_establ + intern_certif + eac_exporter + industry)
+k13_m1 <- formula(female_owner    ~ d3a * eac_exporter  + capital_city + multi_establ + intern_certif)
+k13_m2 <- formula(female_ownership ~ d3a * eac_exporter  + capital_city + multi_establ + intern_certif+ industry)
 
 # estimate models
 k07_m1_r1 <-  lm(k07_m1, data = Kenya_2007)
@@ -35,9 +35,12 @@ summary(k07_m1_r2)
 summary(k07_m2_r1)
 summary(k07_m2_r2)
 
-summary(k13_m1_r1)
-summary(k13_m1_r2)
+summary(k13_m1_r1) # d3a: y=female_owner
+summary(k13_m1_r2) # d3a: y=female_owner
 summary(k13_m2_r1)
 summary(k13_m2_r2)
 
-
+summary(Kenya_2013$d3a)
+Kenya_2013$d3a[Kenya_2013$d3a < 0] <- NA
+Kenya_2013$exporter <- ifelse(Kenya_2013$d3a == 100, FALSE, TRUE)
+summary(Kenya_2013$exporter)

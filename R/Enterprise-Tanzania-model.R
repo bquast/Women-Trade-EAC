@@ -12,31 +12,63 @@ library(dplyr)
 library(labelled)
 library(broom)
 
-# define models
-t06_m1 <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif)
-t06_m2 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif)
+# t06 = Tanzania 2006
+# t13 = Tanzania 2013
+# pr  = female share of production
+# np  = female share of non production
+# fo  = female owner
+# t   = tariff
 
-t13_m1 <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
-t13_m2 <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
+# define models
+t06_pr <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif)
+t06_np <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif)
+
+t13_pr <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
+t13_np <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
+t13_fo <- formula(female_owner ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
+t13_fo <- formula(female_owner ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
+
+t13_pr_t <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + Tariff)
+t13_np_t <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + Tariff)
+
 
 # estimate models
-t06_m1_r1 <-  lm(t06_m1, data = Tanzania_2006)
-t06_m1_r2 <- glm(t06_m1, data = Tanzania_2006, family = quasibinomial(link='logit') )
-t06_m2_r1 <-  lm(t06_m2, data = Tanzania_2006)
-t06_m2_r2 <- glm(t06_m2, data = Tanzania_2006, family = quasibinomial(link='logit') )
+t06_pr_r1 <-  lm(t06_pr, data = Tanzania_2006)
+t06_pr_r2 <- glm(t06_pr, data = Tanzania_2006, family = quasibinomial(link='logit') )
+t06_np_r1 <-  lm(t06_np, data = Tanzania_2006)
+t06_np_r2 <- glm(t06_np, data = Tanzania_2006, family = quasibinomial(link='logit') )
 
-t13_m1_r1 <-  lm(t13_m1, data = Tanzania_2013)
-t13_m1_r2 <- glm(t13_m1, data = Tanzania_2013, family = quasibinomial(link='logit') )
-t13_m2_r1 <-  lm(t13_m2, data = Tanzania_2013)
-t13_m2_r2 <- glm(t13_m2, data = Tanzania_2013, family = quasibinomial(link='logit') )
+t13_pr_r1 <-  lm(t13_pr, data = Tanzania_2013)
+t13_pr_r2 <- glm(t13_pr, data = Tanzania_2013, family = quasibinomial(link='logit') )
+t13_np_r1 <-  lm(t13_np, data = Tanzania_2013)
+t13_np_r2 <- glm(t13_np, data = Tanzania_2013, family = quasibinomial(link='logit') )
+t13_fo_r1 <-  lm(t13_fo, data = Tanzania_2013)
+t13_fo_r2 <- glm(t13_fo, data = Tanzania_2013, family = quasibinomial(link='logit') )
+t13_fo_r1 <-  lm(t13_fo, data = Tanzania_2013)
+t13_fo_r2 <- glm(t13_fo, data = Tanzania_2013, family = quasibinomial(link='logit') )
+
+t13_pr_t_r1 <-  lm(t13_pr_t, data = Tanzania_2013t)
+t13_pr_t_r2 <- glm(t13_pr_t, data = Tanzania_2013t, family = quasibinomial(link='logit') )
+t13_np_t_r1 <-  lm(t13_np_t, data = Tanzania_2013t)
+t13_np_t_r2 <- glm(t13_np_t, data = Tanzania_2013t, family = quasibinomial(link='logit') )
 
 # view output
-summary(t06_m1_r1)
-summary(t06_m1_r2)
-summary(t06_m2_r1)
-summary(t06_m2_r2)
+summary(t06_pr_r1)
+summary(t06_pr_r2)
+summary(t06_np_r1)
+summary(t06_np_r2)
 
-summary(t13_m1_r1)
-summary(t13_m1_r2)
-summary(t13_m2_r1) # good
-summary(t13_m2_r2) # good
+summary(t13_pr_r1)
+summary(t13_pr_r2)
+summary(t13_np_r1) # good
+summary(t13_np_r2) # good
+
+summary(t13_fo_r1)
+summary(t13_fo_r2)
+summary(t13_fo_r1) # good
+summary(t13_fo_r2) # good
+
+summary(t13_pr_t_r1)
+summary(t13_pr_t_r2)
+summary(t13_np_t_r1) # good
+summary(t13_np_t_r2) # good

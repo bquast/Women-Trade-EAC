@@ -80,7 +80,7 @@ Tanzania_2013$no_establishments <- Tanzania_2013$a7a
 Tanzania_2013$multi_establ <- ifelse(Tanzania_2013$no_establishments == 1, FALSE, TRUE)
 Tanzania_2013$intern_certif <- ifelse(Tanzania_2013$b8 < 0, NA, ifelse(Tanzania_2013$b8 == 1, TRUE, FALSE))
 Tanzania_2013$eac_exporter <- ifelse(Tanzania_2013$d8 >= 2010, TRUE, FALSE)
-Tanzania_2013$industry <- as.factor(ifelse(Tanzania_2013$a4b < 20, 'Agriculture', ifelse(Tanzania_2013$a4b < 40, 'Manufacturing', 'Services') ) )
+Tanzania_2013$Industry <- to_factor(Tanzania_2013$a4a)
 Tanzania_2013$female_owner <- ifelse(Tanzania_2013$b4 == 2, TRUE, ifelse(Tanzania_2013$b4 == 1, FALSE, NA))
 Tanzania_2013$female_ownership <- ifelse(Tanzania_2013$b4a < 0, NA, Tanzania_2013$b4a/100)
 
@@ -91,6 +91,10 @@ Tanzania_2013$eac_exporter[is.na(Tanzania_2013$eac_exporter)] <- FALSE
 
 # merge Tanzania 2006 data into 2013 data.frame
 # Tanzania0713 <- select(Tanzania_2006, panelid, c5a, female_share_prod, female_share_nonprod)
+
+# WITS data
+Tanzania_WITS$Industry <- as.factor(Tanzania_WITS$Industry)
+Tanzania_2013t <- merge(Tanzania_2013, Tanzania_WITS, by='Industry')
 
 # save
 save.image(file = "data/Enterprise/Tanzania/Tanzania-Enterprise.RData")
