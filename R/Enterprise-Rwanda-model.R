@@ -13,7 +13,7 @@ library(labelled)
 library(broom)
 
 # define models
-m1 <- formula(female_share ~ to_factor(e1) ) # ratio female prod workers
+m1 <- formula(female_share ~  capital_city + multi_establ + intern_certif) # ratio female prod workers
 m3 <- formula() # (partially) owned by female
 m4 <- formula() # percentage owned by female
 
