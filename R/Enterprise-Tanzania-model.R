@@ -25,12 +25,12 @@ t06_np <- formula(female_share_nonprod ~ international + capital_city + business
 
 t13_pr <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
 t13_np <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
-t13_fo <- formula(female_owner ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
-t13_fs <- formula(female_ownership ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
 
 t13_pr_t <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + Tariff)
 t13_np_t <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + Tariff)
 
+t13_fo <- formula(female_owner ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
+t13_fs <- formula(female_ownership ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
 
 # estimate models
 t06_pr_r1 <-  lm(t06_pr, data = Tanzania_2006)
