@@ -50,5 +50,5 @@ summary(b14_np_r2) # good
 
 summary(b14_pr_t_r1)
 summary(b14_pr_t_r2)
-summary(b14_np_t_r1) # good
-summary(b14_np_t_r2) # good
+summary(b14_np_t_r1)
+summary(b14_np_t_r2)
