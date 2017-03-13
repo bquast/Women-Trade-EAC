@@ -51,7 +51,8 @@ Burundi_2006$multi_establ <- ifelse(Burundi_2006$multiest == 1, TRUE, FALSE)
 Burundi_2006$intern_certif <- ifelse(Burundi_2006$e2b == 1, TRUE, FALSE)
 
 Burundi_2014$main_market <- to_factor(Burundi_2014$e1)
-Burundi_2014$international <- ifelse(Burundi_2014$main_market == 'International', TRUE, ifelse(Burundi_2014$main_market == 0, NA, FALSE))
+Burundi_2014$international <- ifelse(Burundi_2014$main_market == 'International', TRUE, FALSE)
+Burundi_2014[is.na(Burundi_2014$international),]$international <- FALSE
 Burundi_2014$capital_city <- ifelse(Burundi_2014$a3c == 1, TRUE, FALSE)
 Burundi_2014$business_city <- ifelse(Burundi_2014$a3c == 1, TRUE, FALSE)
 Burundi_2014$no_establishments <- ifelse(!is.na(Burundi_2014$a7a), Burundi_2014$a7a, 1)
