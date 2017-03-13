@@ -18,4 +18,5 @@ Tanzania_WITS <- read_delim("~/Women-Trade-EAC/data/WITS/Tanzania.csv",
 # save
 save(Tanzania_2006,
      Tanzania_2013,
+     Tanzania_WITS,
      file = "data/Enterprise/Tanzania/Tanzania-Enterprise-Imported.RData")
