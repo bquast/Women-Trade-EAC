@@ -67,7 +67,8 @@ Rwanda_2011$no_establishments <- Rwanda_2011$a7a
 Rwanda_2011$multi_establ <- ifelse(Rwanda_2011$no_establishments == 1, FALSE, TRUE)
 Rwanda_2011$intern_certif <- ifelse(Rwanda_2011$b8 < 0, NA, ifelse(Rwanda_2011$b8 == 1, TRUE, FALSE))
 # Rwanda_2011$eac_exporter <- ifelse(Rwanda_2011$d8 >= 2010, TRUE, FALSE)
-
+Rwanda_2011$female_owner <- ifelse(Rwanda_2011$AFb3b == 1, TRUE, ifelse(Rwanda_2011$AFb3b == 2, FALSE, NA))
+Rwanda_2011$female_ownership <- ifelse(Rwanda_2011$AFb3a < 0, NA, ifelse(Rwanda_2011$AFb3a == 1, FALSE, TRUE))
 
 
 # check distribution
@@ -78,9 +79,15 @@ hist(Rwanda_2011$female_share)
 
 # simplify industry
 Rwanda_2006$industry <- ifelse(Rwanda_2006$industry < 0, NA, Rwanda_2006$industry)
+Rwanda_2011$Industry <- to_factor(Rwanda_2011$a4a)
 
 # merge Rwanda 2006 data into 2011 data.frame
 # Rwanda0611 <- select(Rwanda_2006, panelid, c5a, female_share_prod, female_share_nonprod)
+
+
+# WITS data
+Rwanda_WITS$Industry <- as.factor(Rwanda_WITS$Industry)
+Rwanda_2011t <- merge(Rwanda_2011, Rwanda_WITS, by='Industry')
 
 # save
 save.image(file = "data/Enterprise/Rwanda/Rwanda-Enterprise.RData")
