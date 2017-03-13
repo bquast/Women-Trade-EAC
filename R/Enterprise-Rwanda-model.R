@@ -13,34 +13,22 @@ library(labelled)
 library(broom)
 
 # define models
-m1 <- formula(female_share ~  capital_city + multi_establ + intern_certif) # ratio female prod workers
-m3 <- formula() # (partially) owned by female
-m4 <- formula() # percentage owned by female
-
-m21 <- formula(female_share_prod ~ to_factor(c5a))
-m22 <- formula(female_share_nonprod ~ to_factor(c5a))
+r11_f <- formula(female_share ~  capital_city + multi_establ + intern_certif) # ratio female prod workers
+r11_f_t <- formula(female_share ~ capital_city + business_city + multi_establ + intern_certif + Tariff)
+r11_fo <- formula(female_share ~ capital_city + business_city + multi_establ + intern_certif + Tariff)
+r11_fs <- formula(female_share ~ capital_city + business_city + multi_establ + intern_certif + Tariff)
 
 # estimate models
-m1_r1 <- lm(m1, data = Rwanda_2011)
-m1_r2 <- glm(m1, data = Rwanda_2011, family = quasibinomial(link='logit') )
-m2_r1 <- lm(m2, data = Rwanda_2011)
+r11_f_r1 <- lm(r11_f, data = Rwanda_2011t)
+r11_f_r2 <- glm(r11_f, data = Rwanda_2011t, family = quasibinomial(link='logit') )
 
-m21_r1 <- lm(m21, data = Rwanda_2006)
-m22_r1 <- lm(m22, data = Rwanda_2006)
-
+r11_f_t_r1 <- lm(r11_f_t, data = Rwanda_2011t)
+r11_f_t_r2 <- glm(r11_f_t, data = Rwanda_2011t, family = quasibinomial(link='logit') )
 
 
 # view output
-summary(m1_r1)
-summary(m2_r1)
+summary(r11_f_r1)
+summary(r11_f_r2)
 
-summary(m21_r1)
-summary(m22_r1)
-
-
-
-tidy(m1_r1)
-tidy(m2_r1)
-
-tidy(m21_r1)
-tidy(m22_r1)
+summary(r11_f_t_r1)
+summary(r11_f_t_r2)
