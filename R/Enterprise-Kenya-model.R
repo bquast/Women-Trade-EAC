@@ -15,8 +15,8 @@ library(broom)
 # define models
 k07_pr <- formula(female_share_prod    ~ international + capital_city + multi_establ + intern_certif)
 k07_np <- formula(female_share_nonprod ~ international + capital_city + multi_establ + intern_certif)
-k13_pr <- formula(female_share_prod    ~ d3a * eac_exporter  + capital_city + multi_establ + intern_certif)
-k13_np <- formula(female_share_nonprod ~ d3a * eac_exporter  + capital_city + multi_establ + intern_certif+ industry)
+k13_pr <- formula(female_share_prod    ~ d3a * eac_exporter  + capital_city + multi_establ + intern_certif + l4a)
+k13_np <- formula(female_share_nonprod ~ d3a * eac_exporter  + capital_city + multi_establ + intern_certif+ industry + l4a)
 k13_fo <- formula(female_owner         ~ d3a * eac_exporter  + capital_city + multi_establ + intern_certif)
 k13_fs <- formula(female_ownership     ~ d3a * eac_exporter  + capital_city + multi_establ + intern_certif+ industry)
 
