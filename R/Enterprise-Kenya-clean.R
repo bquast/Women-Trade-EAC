@@ -101,6 +101,7 @@ Kenya_2007$industry <- ifelse(Kenya_2007$industry == 1, 'Agriculture', ifelse(Ke
 Kenya_2013$industry <- ifelse(Kenya_2013$a4b < 20, 'Agriculture', ifelse(Kenya_2013$a4b < 40, 'Manufacturing', 'Services') )
 
 
+Kenya_2013$firm_size <- Kenya_2013$l3a + Kenya_2013$l3b
 Kenya_2013$firm_cat <- ifelse(Kenya_2013$l4a > 50, 'large', ifelse(Kenya_2013$l4a > 10 & Kenya_2013$l4a <= 50, 'medium', 'small'))
 attach(Kenya_2013)
 Kenya_2013$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
@@ -149,7 +150,7 @@ table(Kenya_2007$international, Kenya_2007$industry)
 
 
 attach(Kenya_2013)
-var_list <- c('female_share_prod', 'female_share_prod', 'eac_exporter', 'capital_city', 'business_city', 'intern_certif', 'industry', 'international', 'multi_establ')
+var_list <- c('female_share_prod', 'female_share_nonprod', 'eac_exporter', 'capital_city', 'business_city', 'intern_certif', 'industry', 'international', 'multi_establ', 'firm_size')
 
 ken13 <- subset(Kenya_2013, select=var_list)
 ken13 <- cbind(country = 'Kenya', ken13)

@@ -89,5 +89,10 @@ Uganda_2013$eac_exporter[is.na(Uganda_2013$eac_exporter)] <- FALSE
 Uganda_WITS$Industry <- as.factor(Uganda_WITS$Industry)
 Uganda_2013t <- merge(Uganda_2013, Uganda_WITS, by='Industry')
 
+
+Uganda_2013$firm_size <- Uganda_2013$l3a + Uganda_2013$l3b
+uga13 <- subset(Uganda_2013, select=var_list)
+uga13 <- cbind(country = 'Uganda', uga13)
+
 # save
 save.image(file = "data/Enterprise/Uganda/Uganda-Enterprise.RData")
