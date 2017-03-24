@@ -43,6 +43,13 @@ Kenya_2013[which(Kenya_2013$l9a2 < 0),]$l9a2 <- NA
 summary(Kenya_2013$l9a2 / Kenya_2013$l9a)
 hist(Kenya_2013$l9a2 / Kenya_2013$l9a)
 
+Kenya_2013$l9a <- as.integer(Kenya_2013$l9a)
+Kenya_2013$l9a2 <- as.integer(Kenya_2013$l9a2)
+
+
+Kenya_2013$edu_ratio <- as.numeric(Kenya_2013$l9a2 / Kenya_2013$l9a)
+Kenya_2013$edu_cat <- ifelse(Kenya_2013$edu_ratio <= 0.5, 0.5, ifelse(Kenya_2013$edu_ratio <= 1, 1, ifelse(Kenya_2013$edu_ratio <= 1.5, 1.5, ifelse(Kenya_2013$edu_ratio <= 2, 2, 3) ) ) )
+
 
 # compute ratios 2013
 Kenya_2007$female_share_nonprod <- with(Kenya_2007, j2b2 / j2a2)
