@@ -100,8 +100,60 @@ hist(Kenya_2013$female_share_nonprod)
 Kenya_2007$industry <- ifelse(Kenya_2007$industry == 1, 'Agriculture', ifelse(Kenya_2007$industry > 1 & Kenya_2007$industry <= 10, 'Manufacturing', 'Services') )
 Kenya_2013$industry <- ifelse(Kenya_2013$a4b < 20, 'Agriculture', ifelse(Kenya_2013$a4b < 40, 'Manufacturing', 'Services') )
 
-# merge Kenya 2007 data into 2013 data.frame
-Kenya0713 <- select(Kenya_2007, panelid, c5a, female_share_prod, female_share_nonprod)
+
+Kenya_2013$firm_cat <- ifelse(Kenya_2013$l4a > 50, 'large', ifelse(Kenya_2013$l4a > 10 & Kenya_2013$l4a <= 50, 'medium', 'small'))
+attach(Kenya_2013)
+Kenya_2013$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+Kenya_2013$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+detach(Kenya_2013)
+attach(Kenya_2013)
+table(Kenya_2013$female_share_prod_cat, Kenya_2013$firm_cat)
+detach(Kenya_2013)
+
+# kenya production workers international firms by sector
+k7_pr_int_ind <- with(Kenya_2007[which(Kenya_2007$international == TRUE),], table(female_share_prod_cat, industry))
+K13_pr_int_ind <- with(Kenya_2013[which(Kenya_2013$international == TRUE),], table(female_share_prod_cat, industry))
+rbind(c(2007, 2007, 2013, 2013), cbind(k7_pr_int_ind, K13_pr_int_ind))
+
+# kenya production workers non-international firms by sector
+k7_pr_ni_ind <- with(Kenya_2007[which(Kenya_2007$international == FALSE),], table(female_share_prod_cat, industry))
+K13_pr_ni_ind <- with(Kenya_2013[which(Kenya_2013$international == FALSE),], table(female_share_prod_cat, industry))
+rbind(c(2007, 2007, 2013, 2013), cbind(k7_pr_ni_ind, K13_pr_ni_ind))
+
+# kenya nonproduction workers international firms by sector
+k7_np_int_ind <- with(Kenya_2007[which(Kenya_2007$international == TRUE),], table(female_share_nonprod_cat, industry))
+K13_np_int_ind <- with(Kenya_2013[which(Kenya_2013$international == TRUE),], table(female_share_nonprod_cat, industry))
+rbind(c(2007, 2007, 2013, 2013), cbind(k7_np_int_ind, K13_np_int_ind))
+
+# kenya nonproduction workers non-international firms by sector
+k7_np_ni_ind <- with(Kenya_2007[which(Kenya_2007$international == FALSE),], table(female_share_nonprod_cat, industry))
+k13_np_ni_ind <- with(Kenya_2013[which(Kenya_2013$international == FALSE),], table(female_share_nonprod_cat, industry))
+
+summary(Kenya_2013$d3a)
+Kenya_2013$d3a[Kenya_2013$d3a < 0] <- NA
+Kenya_2013$exporter <- ifelse(Kenya_2013$d3a == 100, FALSE, TRUE)
+summary(Kenya_2013$exporter)
+
+
+Kenya_2007$firm_cat <- ifelse(Kenya_2007$j2a <= 10, 'small', ifelse(Kenya_2007$j2a <= 50, 'medium', 'large'))
+attach(Kenya_2007)
+Kenya_2007$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+Kenya_2007$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_nonprod <= 0.8, 0.8, 1))))
+detach(Kenya_2007)
+attach(Kenya_2007)
+table(Kenya_2007$female_share_prod_cat, Kenya_2007$firm_cat)
+detach(Kenya_2007)
+
+table(Kenya_2007$international, Kenya_2007$industry)
+
+
+
+attach(Kenya_2013)
+var_list <- c('female_share_prod', 'female_share_prod', 'eac_exporter', 'capital_city', 'business_city', 'intern_certif', 'industry', 'international', 'multi_establ')
+
+ken13 <- subset(Kenya_2013, select=var_list)
+ken13 <- cbind(country = 'Kenya', ken13)
+
 
 # save
 save.image(file = "data/Enterprise/Kenya/Kenya-Enterprise.RData")
