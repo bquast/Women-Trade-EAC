@@ -89,12 +89,70 @@ Tanzania_2013$international[is.na(Tanzania_2013$international)] <- FALSE
 Tanzania_2013$intern_certif[is.na(Tanzania_2013$intern_certif)] <- FALSE
 Tanzania_2013$eac_exporter[is.na(Tanzania_2013$eac_exporter)] <- FALSE
 
+
+Tanzania_2013[which(is.nan(Tanzania_2013$l9a)),]$l9a <- NA
+Tanzania_2013[which(Tanzania_2013$l9a < 0),]$l9a <- NA
+
+Tanzania_2013[which(is.nan(Tanzania_2013$l9a2)),]$l9a2 <- NA
+Tanzania_2013[which(Tanzania_2013$l9a2 < 0),]$l9a2 <- NA
+
+summary(Tanzania_2013$l9a2 / Tanzania_2013$l9a)
+hist(Tanzania_2013$l9a2 / Tanzania_2013$l9a)
+
+Tanzania_2013$edu_ratio <- as.numeric(Tanzania_2013$l9a2 / Tanzania_2013$l9a)
+Tanzania_2013$edu_cat <- ifelse(Tanzania_2013$edu_ratio <= 0.5, 0.5, ifelse(Tanzania_2013$edu_ratio <= 1, 1, ifelse(Tanzania_2013$edu_ratio <= 1.5, 1.5, ifelse(Tanzania_2013$edu_ratio <= 2, 2, 3) ) ) )
+table(Tanzania_2013$edu_cat)
+
+
+
 # merge Tanzania 2006 data into 2013 data.frame
 # Tanzania0713 <- select(Tanzania_2006, panelid, c5a, female_share_prod, female_share_nonprod)
 
 # WITS data
 Tanzania_WITS$Industry <- as.factor(Tanzania_WITS$Industry)
 Tanzania_2013t <- merge(Tanzania_2013, Tanzania_WITS, by='Industry')
+
+
+summary(Tanzania_2013$d3a)
+Tanzania_2013$d3a[Tanzania_2013$d3a < 0] <- NA
+Tanzania_2013$exporter <- ifelse(Tanzania_2013$d3a == 100, FALSE, TRUE)
+summary(Tanzania_2013$exporter)
+
+# simplify industry
+Tanzania_2006$industry <- ifelse(Tanzania_2006$industry == 1, 'Agriculture', ifelse(Tanzania_2006$industry > 1 & Tanzania_2006$industry <= 10, 'Manufacturing', 'Services') )
+Tanzania_2013$a4b <- ifelse(Tanzania_2013$a4b < 0, NA, Tanzania_2013$a4b)
+Tanzania_2013$industry <- ifelse(Tanzania_2013$a4b <= 15, 'Agriculture', ifelse(Tanzania_2013$a4b <= 36, 'Manufacturing', 'Services') )
+table(Tanzania_2013$industry)
+
+Tanzania_2013$firm_size <- Tanzania_2013$l3a + Tanzania_2013$l3b
+Tanzania_2013$firm_cat <- ifelse(Tanzania_2013$l4a > 50, 'large', ifelse(Tanzania_2013$l4a > 10 & Tanzania_2013$l4a <= 50, 'medium', 'small'))
+attach(Tanzania_2013)
+Tanzania_2013$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+Tanzania_2013$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+detach(Tanzania_2013)
+table(Tanzania_2013$female_share_prod_cat, Tanzania_2013$firm_cat)
+table(Tanzania_2013$female_share_nonprod_cat, Tanzania_2013$firm_cat)
+
+table(Tanzania_2013$international, Tanzania_2013$industry)
+
+
+Tanzania_2006$firm_cat <- ifelse(Tanzania_2006$j2a <= 10, 'small', ifelse(Tanzania_2006$j2a <= 50, 'medium', 'large'))
+attach(Tanzania_2006)
+Tanzania_2006$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+Tanzania_2006$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_nonprod <= 0.8, 0.8, 1))))
+detach(Tanzania_2006)
+
+
+
+table(Tanzania_2006$female_share_prod_cat, Tanzania_2006$firm_cat)
+table(Tanzania_2006$female_share_nonprod_cat, Tanzania_2006$firm_cat)
+
+
+table(Tanzania_2006$international, Tanzania_2006$industry)
+
+table(Tanzania_2013$edu_cat, Tanzania_2013$firm_cat)
+table(Tanzania_2013$edu_cat, Tanzania_2013$international)
+
 
 # save
 save.image(file = "data/Enterprise/Tanzania/Tanzania-Enterprise.RData")
