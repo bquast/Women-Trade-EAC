@@ -79,6 +79,47 @@ hist(Uganda_2006$female_share_nonprod)
 hist(Uganda_2013$female_share_prod)
 hist(Uganda_2013$female_share_nonprod)
 
+
+# simplify industry
+Uganda_2006$industry <- ifelse(Uganda_2006$industry == 1, 'Agriculture', ifelse(Uganda_2006$industry > 1 & Uganda_2006$industry <= 10, 'Manufacturing', 'Services') )
+Uganda_2013$a4b <- ifelse(Uganda_2013$a4b < 0, NA, Uganda_2013$a4b)
+Uganda_2013$industry <- ifelse(Uganda_2013$a4b <= 15, 'Agriculture', ifelse(Uganda_2013$a4b <= 36, 'Manufacturing', 'Services') )
+table(Uganda_2013$industry)
+
+Uganda_2013$firm_size <- Uganda_2013$l3a + Uganda_2013$l3b
+Uganda_2013$firm_cat <- ifelse(Uganda_2013$l4a > 50, 'large', ifelse(Uganda_2013$l4a > 10 & Uganda_2013$l4a <= 50, 'medium', 'small'))
+attach(Uganda_2013)
+Uganda_2013$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+Uganda_2013$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+detach(Uganda_2013)
+table(Uganda_2013$female_share_prod_cat, Uganda_2013$firm_cat)
+table(Uganda_2013$female_share_nonprod_cat, Uganda_2013$firm_cat)
+
+table(Uganda_2013$international, Uganda_2013$industry)
+
+
+Uganda_2006$firm_cat <- ifelse(Uganda_2006$j2a <= 10, 'small', ifelse(Uganda_2006$j2a <= 50, 'medium', 'large'))
+attach(Uganda_2006)
+Uganda_2006$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+Uganda_2006$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_nonprod <= 0.8, 0.8, 1))))
+detach(Uganda_2006)
+
+
+
+table(Uganda_2006$female_share_prod_cat, Uganda_2006$firm_cat)
+table(Uganda_2006$female_share_nonprod_cat, Uganda_2006$firm_cat)
+
+Uganda_2013$edu_ratio <- as.numeric(Uganda_2013$l9a2 / Uganda_2013$l9a)
+Uganda_2013$edu_cat <- ifelse(Uganda_2013$edu_ratio <= 0.5, 0.5, ifelse(Uganda_2013$edu_ratio <= 1, 1, ifelse(Uganda_2013$edu_ratio <= 1.5, 1.5, ifelse(Uganda_2013$edu_ratio <= 2, 2, 3) ) ) )
+table(Uganda_2013$edu_cat)
+table(Uganda_2013$edu_cat, Uganda_2013$firm_cat)
+table(Uganda_2013$edu_cat, Uganda_2013$international)
+
+table(Uganda_2006$international, Uganda_2006$industry)
+
+
+
+
 # simplify industry
 # Uganda_2013$industry <- ifelse(Uganda_2013$a4b < 20, 'Agriculture', ifelse(Uganda_2013$a4b < 40, 'Manufacturing', 'Services') )
 
