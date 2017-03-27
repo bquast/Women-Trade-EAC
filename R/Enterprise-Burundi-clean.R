@@ -58,7 +58,7 @@ Burundi_2014$business_city <- ifelse(Burundi_2014$a3c == 1, TRUE, FALSE)
 Burundi_2014$no_establishments <- ifelse(!is.na(Burundi_2014$a7a), Burundi_2014$a7a, 1)
 Burundi_2014$multi_establ <- ifelse(Burundi_2014$no_establishments <= 1, FALSE, TRUE)
 Burundi_2014$intern_certif <- ifelse(Burundi_2014$b8 < 0, NA, ifelse(Burundi_2014$b8 == 1, TRUE, FALSE))
-Burundi_2014$eac_exporter <- ifelse(Burundi_2014$d8 >= 2010, TRUE, FALSE)
+Burundi_2014$eac_exporter <- ifelse(Burundi_2014$d8 >= 2005, TRUE, FALSE)
 Burundi_2014$eac_exporter[is.na(Burundi_2014$eac_exporter)] <- FALSE
 
 # check distribution

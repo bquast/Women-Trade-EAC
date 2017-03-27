@@ -26,8 +26,8 @@ t06_np <- formula(female_share_nonprod ~ international + capital_city + business
 t13_pr <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
 t13_np <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
 
-t13_pr_t <- formula(female_share_prod    ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + Tariff)
-t13_np_t <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + Tariff)
+t13_pr_t <- formula(log(female_share_prod+1)    ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + log(Tariff+1) )
+t13_np_t <- formula(log(female_share_nonprod+1) ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + log(Tariff+1) )
 
 t13_fo <- formula(female_owner ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
 t13_fs <- formula(female_ownership ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)

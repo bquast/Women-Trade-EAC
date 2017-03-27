@@ -66,7 +66,7 @@ Rwanda_2011$business_city <- ifelse(Rwanda_2011$a3c == 1, TRUE, FALSE)
 Rwanda_2011$no_establishments <- Rwanda_2011$a7a
 Rwanda_2011$multi_establ <- ifelse(Rwanda_2011$no_establishments == 1, FALSE, TRUE)
 Rwanda_2011$intern_certif <- ifelse(Rwanda_2011$b8 < 0, NA, ifelse(Rwanda_2011$b8 == 1, TRUE, FALSE))
-# Rwanda_2011$eac_exporter <- ifelse(Rwanda_2011$d8 >= 2010, TRUE, FALSE)
+Rwanda_2011$eac_exporter <- ifelse(Rwanda_2011$d8 >= 2005, TRUE, FALSE)
 Rwanda_2011$female_owner <- ifelse(Rwanda_2011$AFb3b == 1, TRUE, ifelse(Rwanda_2011$AFb3b == 2, FALSE, NA))
 Rwanda_2011$female_ownership <- ifelse(Rwanda_2011$AFb3a < 0, NA, ifelse(Rwanda_2011$AFb3a == 1, FALSE, TRUE))
 

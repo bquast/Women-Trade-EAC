@@ -14,7 +14,7 @@ library(broom)
 
 # define models
 b06_pr <- formula(female_share_prod    ~ international + capital_city + multi_establ + intern_certif)
-b06_np <- formula(female_share_nonprod ~ international + capital_city + multi_establ + intern_certif)
+b06_np <- formula(female_share_nonprod ~ international + capital_city + multi_establ + intern_certif + eac_exporter)
 b14_pr <- formula(female_share_prod    ~ international + capital_city + multi_establ + intern_certif + eac_exporter)
 b14_np <- formula(female_share_nonprod ~ international + capital_city + multi_establ + intern_certif  + Industry + eac_exporter)
 

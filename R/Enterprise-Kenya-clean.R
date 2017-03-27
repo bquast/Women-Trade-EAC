@@ -78,7 +78,8 @@ Kenya_2013$business_city <- ifelse(Kenya_2013$a3c == 1, TRUE, FALSE)
 Kenya_2013$no_establishments <- Kenya_2013$a7a
 Kenya_2013$multi_establ <- ifelse(Kenya_2013$no_establishments == 1, FALSE, TRUE)
 Kenya_2013$intern_certif <- ifelse(Kenya_2013$b8 < 0, NA, ifelse(Kenya_2013$b8 == 1, TRUE, FALSE))
-Kenya_2013$eac_exporter <- ifelse(Kenya_2013$d8 >= 2010, TRUE, FALSE)
+Kenya_2013$eac_exporter <- ifelse(Kenya_2013$d8 >= 2005, TRUE, FALSE)
+Kenya_2013t$eac_exporter <- ifelse(Kenya_2013t$d8 >= 2005, TRUE, FALSE)
 Kenya_2013$industry <- Kenya_2013$a4a
 Kenya_2013$industry <- as.factor(Kenya_2013$industry)
 Kenya_2013$female_owner <- ifelse(Kenya_2013$b4 == 2, TRUE, ifelse(Kenya_2013$b4 == 1, FALSE, NA))
@@ -98,7 +99,7 @@ hist(Kenya_2013$female_share_nonprod)
 
 # simplify industry
 Kenya_2007$industry <- ifelse(Kenya_2007$industry == 1, 'Agriculture', ifelse(Kenya_2007$industry > 1 & Kenya_2007$industry <= 10, 'Manufacturing', 'Services') )
-Kenya_2013$industry <- ifelse(Kenya_2013$a4b < 20, 'Agriculture', ifelse(Kenya_2013$a4b < 40, 'Manufacturing', 'Services') )
+Kenya_2013$Industry <- to_factor(Kenya_2013$a4b)
 
 
 Kenya_2013$firm_size <- Kenya_2013$l3a + Kenya_2013$l3b
@@ -154,6 +155,17 @@ var_list <- c('female_share_prod', 'female_share_nonprod', 'eac_exporter', 'capi
 
 ken13 <- subset(Kenya_2013, select=var_list)
 ken13 <- cbind(country = 'Kenya', ken13)
+
+
+Kenya_WITS <- read.csv(file = 'data/WITS/Kenya-ISIC-weighed.csv', stringsAsFactors = FALSE)
+Kenya_WITS[which(is.na(Kenya_WITS$Tariff)),]$Tariff <- 0
+Kenya_WITS$Industry <- as.factor(Kenya_WITS$Industry)
+Kenya_2013$Industry <- as.factor(Kenya_2013$Industry)
+Kenya_2013t <- merge(Kenya_2013, Kenya_WITS, by='Industry')
+
+Kenya_WITS_RoW <- read.table(file = 'data/WITS/Kenya_WITS_RoW.csv')
+names(Kenya_WITS_RoW)[2] <- 'RoW'
+Kenya_2013t <- merge(Kenya_2013t, Kenya_WITS_RoW, by='Industry')
 
 
 # save

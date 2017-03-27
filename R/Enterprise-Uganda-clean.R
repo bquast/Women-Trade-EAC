@@ -67,7 +67,10 @@ Uganda_2013$business_city <- ifelse(Uganda_2013$a3c == 1, TRUE, FALSE)
 Uganda_2013$no_establishments <- Uganda_2013$a7a
 Uganda_2013$multi_establ <- ifelse(Uganda_2013$no_establishments == 1, FALSE, TRUE)
 Uganda_2013$intern_certif <- ifelse(Uganda_2013$b8 < 0, NA, ifelse(Uganda_2013$b8 == 1, TRUE, FALSE))
-Uganda_2013$eac_exporter <- ifelse(Uganda_2013$d8 >= 2010, TRUE, FALSE)
+Uganda_2013$eac_exporter <- ifelse(Uganda_2013$d8 >= 2005, TRUE, FALSE)
+Uganda_2013[which(is.na(Uganda_2013$eac_exporter)),]$eac_exporter <- 0
+Uganda_2013t$eac_exporter <- ifelse(Uganda_2013t$d8 >= 2005, TRUE, FALSE)
+Uganda_2013t[which(is.na(Uganda_2013t$eac_exporter)),]$eac_exporter <- 0
 Uganda_2013$Industry <- to_factor(Uganda_2013$a4a)
 Uganda_2013$female_owner <- ifelse(Uganda_2013$b4 == 2, TRUE, ifelse(Uganda_2013$b4 == 1, FALSE, NA))
 Uganda_2013$female_ownership <- ifelse(Uganda_2013$b4a < 0, NA, Uganda_2013$b4a/100)

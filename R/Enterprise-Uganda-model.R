@@ -23,7 +23,7 @@ library(broom)
 u06_pr <- formula(female_share_prod ~ international + capital_city + business_city + multi_establ + intern_certif)
 u06_np <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif)
 
-u13_pr <- formula(female_share_prod ~ international + capital_city + business_city + multi_establ + intern_certif)
+u13_pr <- formula(female_share_prod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter)
 u13_np <- formula(female_share_nonprod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + industry)
 
 u13_pr_t <- formula(female_share_prod ~ international + capital_city + business_city + multi_establ + intern_certif + eac_exporter + Tariff)
