@@ -197,6 +197,7 @@ Kenya_WITS_RoW <- read.table(file = 'data/WITS/Kenya_WITS_RoW.csv')
 names(Kenya_WITS_RoW)[2] <- 'RoW'
 Kenya_2013t <- merge(Kenya_2013t, Kenya_WITS_RoW, by='Industry')
 
+Kenya_2013t <- merge(Kenya_2013t, Kenya_WITS_Exp, by='Industry')
 
 # save
 save.image(file = "data/Enterprise/Kenya/Kenya-Enterprise.RData")
