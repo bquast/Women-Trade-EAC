@@ -54,10 +54,12 @@ table(Kenya_2013$edu_cat)
 # compute ratios 2013
 Kenya_2007$female_share_nonprod <- with(Kenya_2007, j2b2 / j2a2)
 Kenya_2007$female_share_prod <- with(Kenya_2007, j2b1 / j2a1)
+Kenya_2007$female_share <- with(Kenya_2007, (j2b2+j2b1)/(j2a2+j2a1) )
 
 Kenya_2013$female_share_prod <- with(Kenya_2013, l5a/(l4a + l4b))
 Kenya_2013$female_share_nonprod <- Kenya_2013$l5b / Kenya_2013$l3b
 Kenya_2013$female_share_temp <- Kenya_2013$l6a / Kenya_2013$l6
+Kenya_2013$female_share <- with(Kenya_2013, (l5a + l5b)/(l4a + l4b + l3b) )
 
 # check computed ratios
 summary(Kenya_2007$female_share_prod)
@@ -72,7 +74,7 @@ Kenya_2007$main_market <- to_factor(Kenya_2007$c5a)
 Kenya_2007$international <- ifelse(Kenya_2007$main_market == 'International', TRUE, ifelse(Kenya_2007$main_market == 0, NA, FALSE))
 Kenya_2007$capital_city <- ifelse(Kenya_2007$city == 'Nairobi', TRUE, FALSE)
 Kenya_2007$business_city <- Kenya_2007$capital_city
-Kenya_2007$industry <- as.factor(ifelse(Kenya_2007$industry == 10, 'Agriculture', ifelse(Kenya_2007$industry > 10, 'Services', ifels(Kenya_2007$industry <= 10 & Kenya_2007$industry > 1, 'Manufacturing', NA)) ) )
+# Kenya_2007$industry <- as.factor(ifelse(Kenya_2007$industry == 10, 'Agriculture', ifelse(Kenya_2007$industry > 10, 'Services', ifelse(Kenya_2007$industry <= 10 & Kenya_2007$industry > 1, 'Manufacturing', NA)) ) )
 Kenya_2007$multi_establ <- ifelse(Kenya_2007$multiest == 1, TRUE, FALSE)
 Kenya_2007$intern_certif <- ifelse(Kenya_2007$e2b == 1, TRUE, FALSE)
 
@@ -86,7 +88,7 @@ Kenya_2013$no_establishments <- Kenya_2013$a7a
 Kenya_2013$multi_establ <- ifelse(Kenya_2013$no_establishments == 1, FALSE, TRUE)
 Kenya_2013$intern_certif <- ifelse(Kenya_2013$b8 < 0, NA, ifelse(Kenya_2013$b8 == 1, TRUE, FALSE))
 Kenya_2013$eac_exporter <- ifelse(Kenya_2013$d8 >= 2005, TRUE, FALSE)
-Kenya_2013t$eac_exporter <- ifelse(Kenya_2013t$d8 >= 2005, TRUE, FALSE)
+Kenya_2013[which(is.na(Kenya_2013$eac_exporter)),]$eac_exporter <- FALSE
 Kenya_2013$industry <- Kenya_2013$a4a
 Kenya_2013$industry <- as.factor(Kenya_2013$industry)
 Kenya_2013$female_owner <- ifelse(Kenya_2013$b4 == 2, TRUE, ifelse(Kenya_2013$b4 == 1, FALSE, NA))
@@ -120,71 +122,72 @@ table(Kenya_2013$female_share_prod_cat, Kenya_2013$firm_cat)
 detach(Kenya_2013)
 
 
-  
-# kenya production workers international firms by sector
-k7_pr_int_ind <- with(Kenya_2007[which(Kenya_2007$international == TRUE),], table(female_share_prod_cat, industry))
-K13_pr_int_ind <- with(Kenya_2013[which(Kenya_2013$international == TRUE),], table(female_share_prod_cat, industry))
-rbind(c(2007, 2007, 2013, 2013), cbind(k7_pr_int_ind, K13_pr_int_ind))
 
-# kenya production workers non-international firms by sector
-k7_pr_ni_ind <- with(Kenya_2007[which(Kenya_2007$international == FALSE),], table(female_share_prod_cat, industry))
-K13_pr_ni_ind <- with(Kenya_2013[which(Kenya_2013$international == FALSE),], table(female_share_prod_cat, industry))
-rbind(c(2007, 2007, 2013, 2013), cbind(k7_pr_ni_ind, K13_pr_ni_ind))
+ # kenya production workers international firms by sector
+ k7_pr_int_ind <- with(Kenya_2007[which(Kenya_2007$international == TRUE),], table(female_share_prod_cat, industry))
+ K13_pr_int_ind <- with(Kenya_2013[which(Kenya_2013$international == TRUE),], table(female_share_prod_cat, industry))
+ rbind(c(2007, 2007, 2013, 2013), cbind(k7_pr_int_ind, K13_pr_int_ind))
 
-# kenya nonproduction workers international firms by sector
-k7_np_int_ind <- with(Kenya_2007[which(Kenya_2007$international == TRUE),], table(female_share_nonprod_cat, industry))
-K13_np_int_ind <- with(Kenya_2013[which(Kenya_2013$international == TRUE),], table(female_share_nonprod_cat, industry))
-rbind(c(2007, 2007, 2013, 2013), cbind(k7_np_int_ind, K13_np_int_ind))
+ # kenya production workers non-international firms by sector
+ k7_pr_ni_ind <- with(Kenya_2007[which(Kenya_2007$international == FALSE),], table(female_share_prod_cat, industry))
+ K13_pr_ni_ind <- with(Kenya_2013[which(Kenya_2013$international == FALSE),], table(female_share_prod_cat, industry))
+ rbind(c(2007, 2007, 2013, 2013), cbind(k7_pr_ni_ind, K13_pr_ni_ind))
 
-# kenya nonproduction workers non-international firms by sector
-k7_np_ni_ind <- with(Kenya_2007[which(Kenya_2007$international == FALSE),], table(female_share_nonprod_cat, industry))
-k13_np_ni_ind <- with(Kenya_2013[which(Kenya_2013$international == FALSE),], table(female_share_nonprod_cat, industry))
+ # kenya nonproduction workers international firms by sector
+ k7_np_int_ind <- with(Kenya_2007[which(Kenya_2007$international == TRUE),], table(female_share_nonprod_cat, industry))
+ K13_np_int_ind <- with(Kenya_2013[which(Kenya_2013$international == TRUE),], table(female_share_nonprod_cat, industry))
+ rbind(c(2007, 2007, 2013, 2013), cbind(k7_np_int_ind, K13_np_int_ind))
 
-summary(Kenya_2013$d3a)
-Kenya_2013$d3a[Kenya_2013$d3a < 0] <- NA
-Kenya_2013$exporter <- ifelse(Kenya_2013$d3a == 100, FALSE, TRUE)
-summary(Kenya_2013$exporter)
+ # kenya nonproduction workers non-international firms by sector
+ k7_np_ni_ind <- with(Kenya_2007[which(Kenya_2007$international == FALSE),], table(female_share_nonprod_cat, industry))
+ k13_np_ni_ind <- with(Kenya_2013[which(Kenya_2013$international == FALSE),], table(female_share_nonprod_cat, industry))
 
-# simplify industry
-Kenya_2007$industry <- ifelse(Kenya_2007$industry == 1, 'Agriculture', ifelse(Kenya_2007$industry > 1 & Kenya_2007$industry <= 10, 'Manufacturing', 'Services') )
-Kenya_2013$industry <- ifelse(Kenya_2013$a4b < 20, 'Agriculture', ifelse(Kenya_2013$a4b < 40, 'Manufacturing', 'Services') )
+ summary(Kenya_2013$d3a)
+ Kenya_2013$d3a[Kenya_2013$d3a < 0] <- NA
+ Kenya_2013$exporter <- ifelse(Kenya_2013$d3a == 100, FALSE, TRUE)
+ summary(Kenya_2013$exporter)
 
+ # simplify industry
+ Kenya_2007$industry <- ifelse(Kenya_2007$industry == 1, 'Agriculture', ifelse(Kenya_2007$industry > 1 & Kenya_2007$industry <= 10, 'Manufacturing', 'Services') )
+ Kenya_2013$industry <- ifelse(Kenya_2013$a4b < 20, 'Agriculture', ifelse(Kenya_2013$a4b < 40, 'Manufacturing', 'Services') )
 
-Kenya_2013$firm_size <- Kenya_2013$l3a + Kenya_2013$l3b
-Kenya_2013$firm_cat <- ifelse(Kenya_2013$l4a > 50, 'large', ifelse(Kenya_2013$l4a > 10 & Kenya_2013$l4a <= 50, 'medium', 'small'))
-attach(Kenya_2013)
-Kenya_2013$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
-Kenya_2013$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
-detach(Kenya_2013)
-table(Kenya_2013$female_share_prod_cat, Kenya_2013$firm_cat)
-table(Kenya_2013$female_share_nonprod_cat, Kenya_2013$firm_cat)
+ Kenya_2007$Industry <- Kenya_2007$industry
 
-table(Kenya_2013$international, Kenya_2013$industry)
+ Kenya_2013$firm_size <- Kenya_2013$l3a + Kenya_2013$l3b
+ Kenya_2013$firm_cat <- ifelse(Kenya_2013$l4a > 50, 'large', ifelse(Kenya_2013$l4a > 10 & Kenya_2013$l4a <= 50, 'medium', 'small'))
+ attach(Kenya_2013)
+ Kenya_2013$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+ Kenya_2013$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+ detach(Kenya_2013)
+ table(Kenya_2013$female_share_prod_cat, Kenya_2013$firm_cat)
+ table(Kenya_2013$female_share_nonprod_cat, Kenya_2013$firm_cat)
 
-
-Kenya_2007$firm_cat <- ifelse(Kenya_2007$j2a <= 10, 'small', ifelse(Kenya_2007$j2a <= 50, 'medium', 'large'))
-attach(Kenya_2007)
-Kenya_2007$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
-Kenya_2007$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_nonprod <= 0.8, 0.8, 1))))
-detach(Kenya_2007)
+ table(Kenya_2013$international, Kenya_2013$industry)
 
 
-
-table(Kenya_2007$female_share_prod_cat, Kenya_2007$firm_cat)
-table(Kenya_2007$female_share_nonprod_cat, Kenya_2007$firm_cat)
-
-
-table(Kenya_2007$international, Kenya_2007$industry)
-
-table(Kenya_2013$edu_cat, Kenya_2013$firm_cat)
-table(Kenya_2013$edu_cat, Kenya_2013$international)
+ Kenya_2007$firm_cat <- ifelse(Kenya_2007$j2a <= 10, 'small', ifelse(Kenya_2007$j2a <= 50, 'medium', 'large'))
+ attach(Kenya_2007)
+ Kenya_2007$female_share_prod_cat <- ifelse(female_share_prod <= 0.2, 0.2, ifelse(female_share_prod <= 0.4, 0.4, ifelse(female_share_prod <= 0.6, 0.6, ifelse(female_share_prod <= 0.8, 0.8, 1))))
+ Kenya_2007$female_share_nonprod_cat <- ifelse(female_share_nonprod <= 0.2, 0.2, ifelse(female_share_nonprod <= 0.4, 0.4, ifelse(female_share_nonprod <= 0.6, 0.6, ifelse(female_share_nonprod <= 0.8, 0.8, 1))))
+ detach(Kenya_2007)
 
 
-attach(Kenya_2013)
-var_list <- c('female_share_prod', 'female_share_nonprod', 'eac_exporter', 'capital_city', 'business_city', 'intern_certif', 'industry', 'international', 'multi_establ', 'firm_size')
 
-ken13 <- subset(Kenya_2013, select=var_list)
-ken13 <- cbind(country = 'Kenya', ken13)
+ table(Kenya_2007$female_share_prod_cat, Kenya_2007$firm_cat)
+ table(Kenya_2007$female_share_nonprod_cat, Kenya_2007$firm_cat)
+
+ table(Kenya_2007$international, Kenya_2007$industry)
+
+ table(Kenya_2013$edu_cat, Kenya_2013$firm_cat)
+ table(Kenya_2013$edu_cat, Kenya_2013$international)
+
+
+ attach(Kenya_2013)
+ var_list <- c('Industry', 'female_share_prod', 'female_share_nonprod', 'eac_exporter', 'capital_city', 'business_city', 'intern_certif', 'international', 'multi_establ', 'Tariff')
+
+ ken13 <- subset(Kenya_2013t, select=var_list)
+ ken13 <- cbind(country = 'Kenya', ken13)
+ detach(Kenya_2013)
 
 
 Kenya_WITS <- read.csv(file = 'data/WITS/Kenya-ISIC-weighed.csv', stringsAsFactors = FALSE)
@@ -193,11 +196,16 @@ Kenya_WITS$Industry <- as.factor(Kenya_WITS$Industry)
 Kenya_2013$Industry <- as.factor(Kenya_2013$Industry)
 Kenya_2013t <- merge(Kenya_2013, Kenya_WITS, by='Industry')
 
-Kenya_WITS_RoW <- read.table(file = 'data/WITS/Kenya_WITS_RoW.csv')
+# Kenya_WITS_RoW <- read.table(file = 'data/WITS/Kenya_WITS_RoW.csv')
+
+
+load("~/Women-Trade-EAC/data/WITS/Kenya_WITS.RData")
 names(Kenya_WITS_RoW)[2] <- 'RoW'
 Kenya_2013t <- merge(Kenya_2013t, Kenya_WITS_RoW, by='Industry')
-
+names(Kenya_WITS_Exp)[2] <- 'ExpTariff'
 Kenya_2013t <- merge(Kenya_2013t, Kenya_WITS_Exp, by='Industry')
+
+
 
 # save
 save.image(file = "data/Enterprise/Kenya/Kenya-Enterprise.RData")

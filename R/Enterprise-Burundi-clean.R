@@ -30,9 +30,11 @@ Burundi_2014$d8[Burundi_2014$d8 < 0] <- NA
 # compute ratios 2014
 Burundi_2006$female_share_nonprod <- with(Burundi_2006, j2b2 / j2a2)
 Burundi_2006$female_share_prod <- with(Burundi_2006, j2b1 / j2a1)
+Burundi_2006$female_share <- with(Burundi_2006, (j2b1+j2b2) / (j2a1 + j2a2) )
 
 Burundi_2014$female_share_prod <- with(Burundi_2014, l5a/(l4a + l4b))
 Burundi_2014$female_share_nonprod <- Burundi_2014$l5b / Burundi_2014$l3b
+Burundi_2014$female_share <- with(Burundi_2014, (l5a +l5b)/(l4a + l4b + l3b))
 
 # check computed ratios
 summary(Burundi_2006$female_share_prod)
@@ -75,8 +77,14 @@ Burundi_2014$Industry <- to_factor(Burundi_2014$a4b)
 # Burundi0614 <- select(Burundi_2006, panelid, c5a, female_share_prod, female_share_nonprod)
 
 # WITS data
-Burundi_2014 <- merge(Burundi_2014, Burundi_WITS, by='Industry')
+Burundi_WITS <- read.csv(file = 'data/WITS/Burundi.csv')
+
+Burundi_2014t <- merge(Burundi_2014, Burundi_WITS, by='Industry')
 rm(Burundi_WITS)
+
+# subset to relevant variables
+bur13 <- subset(Burundi_2014t, select=var_list)
+bur13 <- cbind(country = 'Burundi', bur13)
 
 # save
 save.image(file = "data/Enterprise/Burundi/Burundi-Enterprise.RData")

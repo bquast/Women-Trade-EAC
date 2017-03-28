@@ -40,9 +40,11 @@ Uganda_2013$l5b[Uganda_2013$l5b < 0] <- NA
 # compute ratios 2013
 Uganda_2006$female_share_nonprod <- with(Uganda_2006, j2b2 / j2a2)
 Uganda_2006$female_share_prod <- with(Uganda_2006, j2b1 / j2a1)
+Uganda_2006$female_share <- with(Uganda_2006, (j2b2+j2b1)/(j2a2+j2a1) )
 
 Uganda_2013$female_share_prod <- with(Uganda_2013, l5a/(l4a + l4b))
 Uganda_2013$female_share_nonprod <- Uganda_2013$l5b / Uganda_2013$l3b
+Uganda_2013$female_share <- with(Uganda_2013, (l5a + l5b)/(l4a+l4b+l3b) )
 
 # check computed ratios
 summary(Uganda_2006$female_share_prod)
@@ -135,7 +137,7 @@ Uganda_2013t <- merge(Uganda_2013, Uganda_WITS, by='Industry')
 
 
 Uganda_2013$firm_size <- Uganda_2013$l3a + Uganda_2013$l3b
-uga13 <- subset(Uganda_2013, select=var_list)
+uga13 <- subset(Uganda_2013t, select=var_list)
 uga13 <- cbind(country = 'Uganda', uga13)
 
 # save

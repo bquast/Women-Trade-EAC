@@ -9,7 +9,7 @@ library(dplyr)
 library(readr)
 
 # import Kenya enterprise
-Kenya_2007 <- read_dta(file = "data/Enterprise/Kenya/Kenya-2007--full data-1.dta")
+Kenya_2007extra <- read_dta(file = "data/Enterprise/Kenya/Kenya-2007--full data-1.dta")
 Kenya_2013 <- read_dta(file = "data/Enterprise/Kenya/Kenya-2013-full data.dta")
 
 # save

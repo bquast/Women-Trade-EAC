@@ -40,9 +40,11 @@ Tanzania_2013$l5b[Tanzania_2013$l5b < 0] <- NA
 # compute ratios 2013
 Tanzania_2006$female_share_prod <- with(Tanzania_2006, j2b1 / j2a1)
 Tanzania_2006$female_share_nonprod <- with(Tanzania_2006, j2b2 / j2a2)
+Tanzania_2006$female_share <- with(Tanzania_2006, (j2b1 + j2b2)/(j2a1 + j2a2) )
 
 Tanzania_2013$female_share_prod <- with(Tanzania_2013, l5a/(l4a + l4b))
 Tanzania_2013$female_share_nonprod <- Tanzania_2013$l5b / Tanzania_2013$l3b
+Tanzania_2013$female_share <- with(Tanzania_2013, (l5a + l5b)/(l4a + l4b + l3b) )
 
 # check computed ratios
 summary(Tanzania_2006$female_share_prod)
@@ -114,10 +116,10 @@ Tanzania_WITS$Industry <- as.factor(Tanzania_WITS$Industry)
 Tanzania_2013t <- merge(Tanzania_2013, Tanzania_WITS, by='Industry')
 Tanzania_2013$firm_size <- Tanzania_2013$l3a + Tanzania_2013$l3b
 
-tan13 <- subset(Tanzania_2013, select=var_list)
+tan13 <- subset(Tanzania_2013t, select=var_list)
 tan13 <- cbind(country = 'Tanzania', tan13)
 
-merge13 <- rbind(ken13, tan13)
+merge13 <- rbind(ken13, tan13, uga13, bur13)
 
 
 summary(Tanzania_2013$d3a)
